@@ -1,64 +1,115 @@
-*{margin:0;padding:0;box-sizing:border-box;}
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+scroll-behavior:smooth;
+}
+
 body{
-font-family: Helvetica, Arial, sans-serif;
-background:#fff;
-color:#111;
+font-family: Arial, Helvetica, sans-serif;
+overflow-x:hidden;
+background:white;
 }
-.hero{
-padding:60px 8%;
-min-height:100vh;
+
+#intro{
+height:100vh;
+background:linear-gradient(135deg,#f7b7d2,#f7a35c);
 display:flex;
-flex-direction:column;
 justify-content:center;
+align-items:center;
 position:relative;
+overflow:hidden;
 }
-.portfolio-word{
-letter-spacing:12px;
-font-size:1rem;
-margin-bottom:40px;
+
+.center{
+text-align:center;
+z-index:2;
 }
+
 h1{
-font-size:8rem;
+font-size:6rem;
 line-height:0.9;
-font-weight:700;
-margin-bottom:20px;
+font-weight:300;
 }
-.hero p{font-size:1rem;}
-.section-grid{
-display:grid;
-grid-template-columns:120px 1fr;
-padding:80px 8%;
-border-top:1px solid #ddd;
+
+h1 span{
+font-weight:800;
 }
-.side-number{
-font-size:3rem;
-font-weight:700;
-color:#999;
+
+#enterBtn{
+margin-top:30px;
+padding:14px 30px;
+border:none;
+background:black;
+color:white;
+cursor:pointer;
+font-size:1rem;
 }
+
+.floating{
+position:absolute;
+font-size:1.3rem;
+opacity:0.7;
+animation:float 8s infinite alternate ease-in-out;
+}
+
+.one{top:15%;left:10%;}
+.two{top:70%;left:15%;}
+.three{top:20%;right:15%;}
+.four{bottom:20%;right:20%;}
+.five{top:45%;right:8%;}
+
+@keyframes float{
+from{transform:translateY(0px);}
+to{transform:translateY(-40px) rotate(8deg);}
+}
+
+.cursor{
+position:fixed;
+pointer-events:none;
+font-size:20px;
+color:#ff4da6;
+z-index:9999;
+}
+
+#main{
+display:none;
+padding:80px 10%;
+}
+
+nav{
+display:flex;
+gap:25px;
+flex-wrap:wrap;
+margin-bottom:70px;
+}
+
+nav a{
+text-decoration:none;
+color:black;
+font-weight:bold;
+}
+
+.content{
+margin-bottom:90px;
+}
+
 .content h2{
 font-size:2rem;
-margin-bottom:25px;
-letter-spacing:4px;
+margin-bottom:20px;
 }
+
 .content p{
 font-size:1.2rem;
 line-height:1.8;
 max-width:700px;
 }
-.project{
-font-size:2rem;
-padding:20px 0;
-border-bottom:1px solid #ddd;
-transition:0.3s;
-}
-.project:hover{
-padding-left:20px;
-letter-spacing:4px;
-}
+
 @media(max-width:768px){
-h1{font-size:4rem;}
-.section-grid{grid-template-columns:1fr;gap:20px;}
-.side-number{font-size:2rem;}
-.content h2{font-size:1.4rem;}
-.project{font-size:1.4rem;}
+h1{
+font-size:3rem;
+}
+nav{
+flex-direction:column;
+}
 }
