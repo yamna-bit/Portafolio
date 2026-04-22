@@ -1,8 +1,8 @@
 body {
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
-  background: black;
-  color: whithe;
+  background: white;
+  color: dark pink;
 }
 section, header { padding: 60px 10%; }
 .hero h1 {
@@ -12,11 +12,11 @@ section, header { padding: 60px 10%; }
 }
 .small { letter-spacing: 4px; font-size: 0.8rem; }
 .subtitle { font-size: 1.3rem; margin-top: 20px; }
-.about { font-size: 2rem; border-top: 1px solid #ff0080; }
+.about { font-size: 2rem; border-top: 1px solid #dddd; }
 .projects h2, .contact h2 { font-size: 2rem; }
 .card {
-  padding: 25px;
-  margin: 15px 0;
+  padding: 25px #ff0080;
+  margin: 15px 0 #ff0080;
   border: 1px solid #ff0080;
   transition: 0.3s;
 }
