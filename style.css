@@ -1,115 +1,30 @@
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-scroll-behavior:smooth;
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: white;
+  color: black;
 }
-
-body{
-font-family: Arial, Helvetica, sans-serif;
-overflow-x:hidden;
-background:white;
+section, header { padding: 60px 10%; }
+.hero h1 {
+  font-size: 6rem;
+  line-height: 0.9;
+  margin: 0;
 }
-
-#intro{
-height:100vh;
-background:linear-gradient(135deg,#f7b7d2,#f7a35c);
-display:flex;
-justify-content:center;
-align-items:center;
-position:relative;
-overflow:hidden;
+.small { letter-spacing: 4px; font-size: 0.8rem; }
+.subtitle { font-size: 1.3rem; margin-top: 20px; }
+.about { font-size: 2rem; border-top: 1px solid #ddd; }
+.projects h2, .contact h2 { font-size: 2rem; }
+.card {
+  padding: 25px;
+  margin: 15px 0;
+  border: 1px solid #ddd;
+  transition: 0.3s;
 }
-
-.center{
-text-align:center;
-z-index:2;
+.card:hover {
+  transform: translateX(10px);
+  background: #f5f5f5;
 }
-
-h1{
-font-size:6rem;
-line-height:0.9;
-font-weight:300;
-}
-
-h1 span{
-font-weight:800;
-}
-
-#enterBtn{
-margin-top:30px;
-padding:14px 30px;
-border:none;
-background:black;
-color:white;
-cursor:pointer;
-font-size:1rem;
-}
-
-.floating{
-position:absolute;
-font-size:1.3rem;
-opacity:0.7;
-animation:float 8s infinite alternate ease-in-out;
-}
-
-.one{top:15%;left:10%;}
-.two{top:70%;left:15%;}
-.three{top:20%;right:15%;}
-.four{bottom:20%;right:20%;}
-.five{top:45%;right:8%;}
-
-@keyframes float{
-from{transform:translateY(0px);}
-to{transform:translateY(-40px) rotate(8deg);}
-}
-
-.cursor{
-position:fixed;
-pointer-events:none;
-font-size:20px;
-color:#ff4da6;
-z-index:9999;
-}
-
-#main{
-display:none;
-padding:80px 10%;
-}
-
-nav{
-display:flex;
-gap:25px;
-flex-wrap:wrap;
-margin-bottom:70px;
-}
-
-nav a{
-text-decoration:none;
-color:black;
-font-weight:bold;
-}
-
-.content{
-margin-bottom:90px;
-}
-
-.content h2{
-font-size:2rem;
-margin-bottom:20px;
-}
-
-.content p{
-font-size:1.2rem;
-line-height:1.8;
-max-width:700px;
-}
-
 @media(max-width:768px){
-h1{
-font-size:3rem;
-}
-nav{
-flex-direction:column;
-}
+.hero h1 { font-size: 3rem; }
+.about { font-size: 1.4rem; }
 }
