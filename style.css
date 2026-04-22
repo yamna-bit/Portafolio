@@ -2,7 +2,7 @@ body {
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
   background: white;
-  color: black;
+  color: pink;
 }
 section, header { padding: 60px 10%; }
 .hero h1 {
