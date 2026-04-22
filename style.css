@@ -1,17 +1,50 @@
-/* style.css REEMPLAZA tu CSS actual por este */
+/* style.css actualizado */
 
 body{
   margin:0;
   font-family: Arial, Helvetica, sans-serif;
   background:white;
   color:#000;
+  overflow-x:hidden;
 }
 
 section, header{
   padding:60px 10%;
+  position:relative;
+}
+
+/* CORAZONES FLOTANTES */
+body::before,
+body::after{
+  content:"<3";
+  position:fixed;
+  color:#ff0080;
+  font-size:22px;
+  opacity:0.35;
+  z-index:0;
+  animation:flotar1 10s infinite linear;
+}
+
+body::after{
+  left:80%;
+  animation:flotar2 14s infinite linear;
+}
+
+@keyframes flotar1{
+  0%{top:100%; left:10%;}
+  100%{top:-10%; left:25%;}
+}
+
+@keyframes flotar2{
+  0%{top:100%; left:80%;}
+  100%{top:-10%; left:60%;}
 }
 
 /* PORTADA */
+.hero{
+  z-index:2;
+}
+
 .hero h1{
   font-size:6rem;
   line-height:0.9;
@@ -31,14 +64,12 @@ section, header{
   font-size:1.3rem;
   margin-top:20px;
   color:#ff8000;
-  font-weight:600;
+  font-weight:700;
 }
 
 /* SOBRE MI */
 .about{
   font-size:2rem;
-  border-top:2px solid #ff0080;
-  border-bottom:2px solid #ff8000;
   font-weight:700;
 }
 
@@ -51,7 +82,7 @@ section, header{
   font-weight:900;
 }
 
-/* TARJETAS PROYECTOS */
+/* PROYECTOS */
 .card{
   display:inline-block;
   padding:14px 22px;
@@ -60,7 +91,6 @@ section, header{
   color:white;
   font-weight:800;
   font-size:1.1rem;
-  border-radius:0;
   transition:0.3s;
 }
 
@@ -70,10 +100,6 @@ section, header{
 }
 
 /* CONTACTO */
-.contact{
-  border-top:2px solid #000;
-}
-
 .contact p{
   font-size:1.2rem;
   font-weight:600;
