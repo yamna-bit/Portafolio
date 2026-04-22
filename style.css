@@ -12,7 +12,7 @@ section, header { padding: 60px 10%; }
 }
 .small { letter-spacing: 4px; font-size: 0.8rem; }
 .subtitle { font-size: 1.3rem; margin-top: 20px; }
-.about { font-size: 2rem; border-top: 1px solid #ddd; }
+.about { font-size: 2rem; border-top: 1px solid #ff0080; }
 .projects h2, .contact h2 { font-size: 2rem; }
 .card {
   padding: 25px;
