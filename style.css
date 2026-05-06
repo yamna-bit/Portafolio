@@ -1,81 +1,66 @@
 body {
   margin: 0;
-  overflow: hidden;
   font-family: Arial;
 }
 
-/* BOTONES FLOTANTES (UN SOLO SISTEMA) */
-.ui-btn {
+/* NAV */
+.nav {
   position: fixed;
-  z-index: 20;
-  background: transparent;
-  border: 2px solid #ff2d78;
-  color: #ff2d78;
-  padding: 10px 18px;
-  font-size: 14px;
-  cursor: pointer;
-  border-radius: 20px;
-  transition: 0.3s;
-  font-family: Arial Black;
+  top: 20px;
+  left: 20px;
+  z-index: 10;
+  display: flex;
+  gap: 20px;
 }
 
-.ui-btn:hover {
+.nav a {
+  text-decoration: none;
+  border: 2px solid #ff2d78;
+  padding: 10px 16px;
+  border-radius: 20px;
+  color: #ff2d78;
+  font-family: Arial Black;
+  transition: 0.3s;
+}
+
+.nav a:hover {
   background: #ff2d78;
   color: white;
 }
 
-/* POSICIÓN BOTONES */
-.about {
-  top: 20px;
-  left: 20px;
-}
-
-.projects {
-  top: 20px;
-  left: 140px;
-}
-
-/* BOXES (ABOUT / PROJECTS) */
-.box {
-  position: fixed;
-  top: 80px;
-  left: 20px;
-
-  width: 240px;
-  background: white;
-
-  border: 2px solid #ff2d78;
-  border-radius: 16px;
-
-  padding: 12px;
-  z-index: 30;
-}
-
-.box-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  font-family: Arial Black;
-  color: #ff2d78;
-}
-
-.project-list {
-  margin-top: 10px;
+/* PROJECTS LISTA */
+.gallery {
+  margin-top: 120px;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 15px;
+  padding: 20px;
 }
 
-.project {
-  padding: 6px;
-  border-radius: 10px;
-  border: 1px solid #ff2d78;
-  font-family: Arial;
-  font-size: 12px;
+.project a {
+  display: block;
+  padding: 15px;
+  border: 2px solid #ff2d78;
+  border-radius: 12px;
+  color: #ff2d78;
+  text-decoration: none;
+  font-family: Arial Black;
 }
 
-/* OCULTO */
-.hidden {
-  display: none;
+/* ABOUT */
+.about-container {
+  margin-top: 120px;
+  padding: 20px;
+}
+
+.about-grid {
+  margin-top: 20px;
+  display: flex;
+  gap: 10px;
+}
+
+.about-grid img {
+  width: 50%;
+  border-radius: 12px;
+  border: 2px solid #ff2d78;
 }
