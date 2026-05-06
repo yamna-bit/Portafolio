@@ -354,3 +354,12 @@ function openAbout() {
 function openProjects() {
   alert("PROJECTS: aquí van tus trabajos");
 }
+
+function openProjects() {
+  document.getElementById("projectsPanel").classList.remove("hidden");
+}
+
+function closeProjects() {
+  document.getElementById("projectsPanel").classList.add("hidden");
+}
+
