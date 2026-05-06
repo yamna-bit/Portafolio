@@ -1,36 +1,69 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Yamna Carrión</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <header class="hero">
-    <p class="small">PORTAFOLIO 2026</p>
-    <h1>YAMNA<br>CARRIÓN</h1>
-    <p class="subtitle">Diseño objetos, experiencias y narrativas.</p>
-  </header>
+<!-- ===== NAV / MENÚ SIMPLE ===== -->
+<nav class="nav">
+  <a href="#home">HOME</a>
+  <a href="#about">ABOUT</a>
+  <a href="#projects">PROJECTS</a>
+  <a href="#contact">CONTACT</a>
+</nav>
 
-  <section class="about">
-    <p>Curiosidad. Error. Materia. Observación. Movimiento.</p>
-  </section>
+<!-- ===== HERO / PANTALLA INICIAL ===== -->
+<header id="home" class="hero">
+  <p class="small">PORTAFOLIO 2026</p>
+  <h1>YAMNA<br>CARRIÓN</h1>
+  <p class="subtitle">Diseño objetos, experiencias y narrativas.</p>
+</header>
 
-  <section class="projects">
-    <h2>Proyectos</h2>
-    <div class="card">ABRUTA — Moda + materialidad experimental</div>
-    <div class="card">AND-Y — Robot interactivo con Arduino</div>
-    <div class="card">VELLUM — Luminaria cinética</div>
-    <div class="card">FLUIDEZ — Del modelado digital al objeto</div>
-  </section>
+<!-- ===== ABOUT (SCROLL LARGO TIPO TU PDF) ===== -->
+<section id="about" class="about">
 
-  <section class="contact">
-    <h2>Contacto</h2>
-    <p>@yamnadesign_</p>
-    <p>yamna.designme@gmail.com</p>
-  </section>
+  <!-- intro -->
+  <p class="about-text">
+    Holi<3 Soy Yamna Carrión...
+  </p>
 
-  <script src="script.js"></script>
-</body>
-</html>
+  <!-- intereses -->
+  <div class="tags">
+    <span>Programación</span>
+    <span>Diseño ux/ui</span>
+    <span>Materialidades</span>
+    <span>Prototipado</span>
+  </div>
+
+  <!-- habilidades -->
+  <div class="skills">
+    <h3>HABILIDADES</h3>
+    <p>Observación / Prototipado / Pensamiento crítico / Experimentación</p>
+  </div>
+
+</section>
+
+<!-- ===== PROYECTOS (TIPO GRID CON IMAGEN) ===== -->
+<section id="projects" class="projects">
+
+  <h2>Proyectos</h2>
+
+  <div class="grid">
+
+    <!-- proyecto 1 -->
+    <a href="abruta.html" class="project-card">
+      <img src="img/abruta.jpg">
+      <p>ABRUTA</p>
+    </a>
+
+    <!-- proyecto 2 -->
+    <a href="andy.html" class="project-card">
+      <img src="img/andy.jpg">
+      <p>AND-Y</p>
+    </a>
+
+  </div>
+
+</section>
+
+<!-- ===== CONTACTO ===== -->
+<section id="contact" class="contact">
+  <h2>Contacto</h2>
+
+  <a href="https://instagram.com/yamnadesign_" target="_blank">Instagram</a>
+  <a href="mailto:yamna.designme@gmail.com">Mail</a>
+</section>
