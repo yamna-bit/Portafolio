@@ -1,5 +1,5 @@
 // ==========================
-// VARIABLES PRINCIPALES
+// VARIABLES
 // ==========================
 
 let letters = [];
@@ -10,6 +10,8 @@ let bursts = [];
 let dragging = null;
 let allLocked = false;
 
+let fontBold;
+let fontLight;
 
 // ==========================
 // SETUP
@@ -72,36 +74,8 @@ function setup() {
   }
 }
 
-
 // ==========================
-// POSICIÓN ALEATORIA
-// ==========================
-function getRandomPosition() {
-  let x, y, safe = false;
-
-  while (!safe) {
-    x = random(width);
-    y = random(height);
-
-    let d = dist(x, y, width / 2, height / 2);
-
-    if (d > 220) {
-      safe = true;
-
-      for (let l of letters) {
-        if (dist(x, y, l.x, l.y) < 120) {
-          safe = false;
-        }
-      }
-    }
-  }
-
-  return { x, y };
-}
-
-
-// ==========================
-// DRAW
+// LOOP
 // ==========================
 function draw() {
   background(255);
@@ -116,7 +90,6 @@ function draw() {
   checkAllLocked();
 }
 
-
 // ==========================
 // CORAZONES
 // ==========================
@@ -124,7 +97,6 @@ function drawHearts() {
   textFont(fontLight);
 
   for (let h of hearts) {
-
     h.y -= h.speed;
     h.x += sin(frameCount * 0.01 + h.y) * h.drift;
 
@@ -140,7 +112,6 @@ function drawHearts() {
   }
 }
 
-
 // ==========================
 // SLOTS
 // ==========================
@@ -151,15 +122,13 @@ function drawSlots() {
 
   for (let s of slots) {
     fill(0, 15);
-    noStroke();
     textSize(120);
     text(s.char, s.x, s.y);
   }
 }
 
-
 // ==========================
-// LETRAS
+// LETRAS (DRAG + ANIMACIÓN FINAL)
 // ==========================
 function drawLetters() {
   textFont(fontBold);
@@ -172,69 +141,27 @@ function drawLetters() {
     }
 
     if (allLocked) {
+      let targetX = l.baseX + sin(frameCount * 0.02 + l.offset) * 40;
+      let targetY = l.baseY + cos(frameCount * 0.02 + l.offset) * 40;
 
-      let speed = 0.02 + (l.offset % 0.02);
-
-      let nX = noise(frameCount * speed, l.offset);
-      let nY = noise(frameCount * speed + 500, l.offset);
-
-      let chaos = 100;
-
-      let waveX = sin(frameCount * 0.03 + l.offset) * 30;
-      let waveY = cos(frameCount * 0.025 + l.offset) * 30;
-
-      let targetX = l.baseX + map(nX, 0, 1, -chaos, chaos) + waveX;
-      let targetY = l.baseY + map(nY, 0, 1, -chaos, chaos) + waveY;
-
-      l.x = lerp(l.x, targetX, 0.09);
-      l.y = lerp(l.y, targetY, 0.09);
+      l.x = lerp(l.x, targetX, 0.08);
+      l.y = lerp(l.y, targetY, 0.08);
     }
 
     fill(l.col);
-    noStroke();
     textSize(120);
     text(l.char, l.x, l.y);
   }
 }
 
-
 // ==========================
-// BURSTS
-// ==========================
-function drawBursts() {
-  textFont(fontLight);
-
-  for (let i = bursts.length - 1; i >= 0; i--) {
-    let b = bursts[i];
-
-    for (let p of b.particles) {
-
-      fill(255, 80, 120, p.alpha);
-      textSize(p.size);
-      text("<3", p.x, p.y);
-
-      p.x += p.vx;
-      p.y += p.vy;
-
-      p.alpha -= 3;
-    }
-
-    if (b.particles[0].alpha <= 0) {
-      bursts.splice(i, 1);
-    }
-  }
-}
-
-
-// ==========================
-// INTERACCIÓN
+// INTERACCIÓN DRAG
 // ==========================
 function mousePressed() {
-
   if (allLocked) return;
 
   for (let l of letters) {
-    if (dist(mouseX, mouseY, l.x, l.y) < 60 && !l.locked) {
+    if (dist(mouseX, mouseY, l.x, l.y) < 60) {
       dragging = l;
       break;
     }
@@ -242,111 +169,41 @@ function mousePressed() {
 }
 
 function mouseReleased() {
-
-  if (dragging && !allLocked) {
-
-    for (let s of slots) {
-
-      if (dragging.char === s.char) {
-
-        let d = dist(dragging.x, dragging.y, s.x, s.y);
-
-        if (d < 80) {
-          dragging.x = s.x;
-          dragging.y = s.y;
-          dragging.locked = true;
-
-          createBurst(s.x, s.y);
-        }
-      }
-    }
-  }
-
   dragging = null;
 }
 
-
 // ==========================
-// BURST
-// ==========================
-function createBurst(x, y) {
-  let particles = [];
-
-  for (let i = 0; i < 12; i++) {
-    particles.push({
-      x: x,
-      y: y,
-      vx: random(-2.5, 2.5),
-      vy: random(-2.5, 2.5),
-      alpha: 255,
-      size: random(10, 18)
-    });
-  }
-
-  bursts.push({ particles });
-}
-
-
-// ==========================
-// CHECK
-// ==========================
-function checkAllLocked() {
-  allLocked = letters.every(l => l.locked);
-}
-
-
-// ==========================
-// INFO
+// INFO CENTRAL
 // ==========================
 function drawInfo() {
-
-  textFont(fontLight);
-
-  fill(255, 180, 0);
-  textSize(26);
-  text("C A R R I Ó N", width / 2, height / 2 + 50);
-
   fill(255, 140, 0);
-  textSize(13);
-  text("Portafolio", width / 2, height / 2 + 80);
-  text("2026", width / 2, height / 2 + 100);
-}
+  textSize(26);
+  text("CARRIÓN", width/2, height/2 + 60);
 
+  fill(255, 80, 120);
+  textSize(14);
+  text("PORTAFOLIO 2026", width/2, height/2 + 90);
+}
 
 // ==========================
 // CURSOR
 // ==========================
 function drawCursor() {
+  fill(255, 45, 120);
   noStroke();
-  fill(255, 80, 120);
   ellipse(mouseX, mouseY, 10, 10);
 }
 
-
 // ==========================
-// UI: ABOUT + PROJECTS
+// UTIL
 // ==========================
-
-function openAbout() {
-  document.getElementById("aboutBox").classList.remove("hidden");
+function getRandomPosition() {
+  return {
+    x: random(width),
+    y: random(height)
+  };
 }
 
-function closeAbout() {
-  document.getElementById("aboutBox").classList.add("hidden");
-}
-
-function openProjects() {
-  document.getElementById("projectsBox").classList.remove("hidden");
-}
-
-function closeProjects() {
-  document.getElementById("projectsBox").classList.add("hidden");
-}
-
-function goTo(url) {
-  document.body.classList.add("fade-out");
-
-  setTimeout(() => {
-    window.location.href = url;
-  }, 400);
+function checkAllLocked() {
+  allLocked = letters.every(l => l.locked);
 }
