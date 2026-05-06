@@ -3,47 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
   <title>Yamna Carrión</title>
 
   <link rel="stylesheet" href="style.css">
-
-  <!-- p5.js -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
 </head>
 
 <body>
 
-  <!-- UI BOTONES -->
-  <button onclick="openAbout()" class="ui-btn about">ABOUT</button>
-  <button onclick="openProjects()" class="ui-btn projects">PROJECTS</button>
-
-  <!-- ABOUT -->
-  <div id="aboutBox" class="box hidden">
-    <div class="box-header">
-      <h2>ABOUT</h2>
-      <button onclick="closeAbout()">x</button>
-    </div>
-    <p>
-      Soy Yamna Carrión, estudiante de diseño industrial.
-    </p>
+  <div class="nav">
+    <a href="about.html">ABOUT</a>
+    <a href="projects.html">PROJECTS</a>
   </div>
 
-  <!-- PROJECTS -->
-  <div id="projectsBox" class="box hidden">
-    <div class="box-header">
-      <h2>PROJECTS</h2>
-      <button onclick="closeProjects()">x</button>
-    </div>
-
-    <div class="project-list">
-      <div class="project">Proyecto 01</div>
-      <div class="project">Proyecto 02</div>
-      <div class="project">Proyecto 03</div>
-    </div>
-  </div>
-
-  <!-- p5 script SIEMPRE AL FINAL -->
   <script src="script.js"></script>
 
 </body>
