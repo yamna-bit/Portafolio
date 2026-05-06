@@ -5,13 +5,9 @@
 let letters = [];
 let slots = [];
 let hearts = [];
-let bursts = [];
 
 let dragging = null;
 let allLocked = false;
-
-let fontBold;
-let fontLight;
 
 // ==========================
 // SETUP
@@ -22,9 +18,6 @@ function setup() {
   textAlign(CENTER, CENTER);
 
   let word = "YAMNA";
-
-  fontBold = 'Arial Black';
-  fontLight = 'Arial';
 
   let colors = [
     color(255, 140, 0),
@@ -75,7 +68,7 @@ function setup() {
 }
 
 // ==========================
-// LOOP
+// DRAW
 // ==========================
 function draw() {
   background(255);
@@ -83,18 +76,14 @@ function draw() {
   drawHearts();
   drawSlots();
   drawLetters();
-  drawBursts();
   drawInfo();
   drawCursor();
-
-  checkAllLocked();
 }
 
 // ==========================
 // CORAZONES
 // ==========================
 function drawHearts() {
-  textFont(fontLight);
 
   for (let h of hearts) {
     h.y -= h.speed;
@@ -118,8 +107,6 @@ function drawHearts() {
 function drawSlots() {
   if (allLocked) return;
 
-  textFont(fontBold);
-
   for (let s of slots) {
     fill(0, 15);
     textSize(120);
@@ -128,10 +115,9 @@ function drawSlots() {
 }
 
 // ==========================
-// LETRAS (DRAG + ANIMACIÓN FINAL)
+// LETRAS
 // ==========================
 function drawLetters() {
-  textFont(fontBold);
 
   for (let l of letters) {
 
@@ -155,7 +141,7 @@ function drawLetters() {
 }
 
 // ==========================
-// INTERACCIÓN DRAG
+// DRAG
 // ==========================
 function mousePressed() {
   if (allLocked) return;
@@ -173,7 +159,7 @@ function mouseReleased() {
 }
 
 // ==========================
-// INFO CENTRAL
+// INFO
 // ==========================
 function drawInfo() {
   fill(255, 140, 0);
@@ -202,8 +188,4 @@ function getRandomPosition() {
     x: random(width),
     y: random(height)
   };
-}
-
-function checkAllLocked() {
-  allLocked = letters.every(l => l.locked);
 }
