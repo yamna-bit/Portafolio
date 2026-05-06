@@ -8,46 +8,44 @@
 
   <link rel="stylesheet" href="style.css">
 
-  <!-- ESTO ES p5.js (motor) -->
+  <!-- p5.js -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
 </head>
 
 <body>
 
-  <!-- tu interacción -->
+  <!-- UI BOTONES -->
+  <button onclick="openAbout()" class="ui-btn about">ABOUT</button>
+  <button onclick="openProjects()" class="ui-btn projects">PROJECTS</button>
+
+  <!-- ABOUT -->
+  <div id="aboutBox" class="box hidden">
+    <div class="box-header">
+      <h2>ABOUT</h2>
+      <button onclick="closeAbout()">x</button>
+    </div>
+    <p>
+      Soy Yamna Carrión, estudiante de diseño industrial.
+    </p>
+  </div>
+
+  <!-- PROJECTS -->
+  <div id="projectsBox" class="box hidden">
+    <div class="box-header">
+      <h2>PROJECTS</h2>
+      <button onclick="closeProjects()">x</button>
+    </div>
+
+    <div class="project-list">
+      <div class="project">Proyecto 01</div>
+      <div class="project">Proyecto 02</div>
+      <div class="project">Proyecto 03</div>
+    </div>
+  </div>
+
+  <!-- p5 script SIEMPRE AL FINAL -->
   <script src="script.js"></script>
 
 </body>
-
-<button onclick="openProjects()" class="projects-btn">PROJECTS</button>
-
-<div id="projectsPanel" class="projects-panel hidden">
-
-  <div class="projects-header">
-    <h1>PROJECTS</h1>
-    <button onclick="closeProjects()">CLOSE</button>
-  </div>
-
-  <div class="grid">
-
-    <div class="card">
-      <div class="img"></div>
-      <p>Proyecto 01</p>
-    </div>
-
-    <div class="card">
-      <div class="img"></div>
-      <p>Proyecto 02</p>
-    </div>
-
-    <div class="card">
-      <div class="img"></div>
-      <p>Proyecto 03</p>
-    </div>
-
-  </div>
-
-</div>
-</div>
 </html>
 
