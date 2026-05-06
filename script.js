@@ -342,3 +342,11 @@ function openProjects() {
 function closeProjects() {
   document.getElementById("projectsBox").classList.add("hidden");
 }
+
+function goTo(url) {
+  document.body.classList.add("fade-out");
+
+  setTimeout(() => {
+    window.location.href = url;
+  }, 400);
+}
