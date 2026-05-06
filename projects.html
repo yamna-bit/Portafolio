@@ -2,46 +2,34 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Projects</title>
+
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<!-- NAV -->
-<button class="ui-btn about-btn" onclick="goTo('about.html')">
-  ABOUT
-</button>
+<div class="cursor" id="cursor"></div>
 
-<button class="ui-btn projects-btn" onclick="goTo('index.html')">
-  HOME
-</button>
+<button class="ui-btn about-btn" onclick="location.href='about.html'">ABOUT</button>
+<button class="ui-btn projects-btn" onclick="location.href='index.html'">HOME</button>
 
-<!-- COLLAGE -->
-<div class="collage">
+<div class="grid">
 
-  <a href="projects/abruta.html" class="item">
-    <img src="assets/abruta.jpg">
-    <span>ABRUTA</span>
-  </a>
-
-  <a href="projects/vellum.html" class="item">
-    <img src="assets/vellum.jpg">
-    <span>VELLUM</span>
-  </a>
-
-  <a href="projects/andy.html" class="item">
-    <img src="assets/andy.jpg">
-    <span>ANDY</span>
-  </a>
+  <a href="projects/vellum.html" class="card">VELLUM</a>
+  <a href="projects/andy.html" class="card">ANDY</a>
+  <a href="projects/abruta.html" class="card">ABRUTA</a>
 
 </div>
 
 <script>
-function goTo(url){
-  document.body.classList.add("fade-out");
-  setTimeout(()=> window.location.href=url, 400);
-}
+const cursor = document.getElementById("cursor");
+
+document.addEventListener("mousemove", (e) => {
+  cursor.style.left = e.clientX + "px";
+  cursor.style.top = e.clientY + "px";
+});
 </script>
 
 </body>
