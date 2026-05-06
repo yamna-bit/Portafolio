@@ -14,25 +14,20 @@
 
 <body>
 
-<!-- cursor -->
+<!-- cursor personalizado -->
 <div class="cursor" id="cursor"></div>
 
 <!-- navegación -->
-<button onclick="location.href='about.html'">ABOUT</button>
-<button onclick="location.href='proyects.html'">PROYECTS</button>
+<button class="ui-btn about-btn" onclick="location.href='about.html'">
+  ABOUT
+</button>
 
-<!-- TU ANIMACIÓN VUELVE AQUÍ -->
+<button class="ui-btn projects-btn" onclick="location.href='proyects.html'">
+  PROYECTS
+</button>
+
+<!-- TU ANIMACIÓN COMPLETA -->
 <script src="script.js"></script>
-
-<script>
-// cursor global
-const cursor = document.getElementById("cursor");
-
-document.addEventListener("mousemove", (e) => {
-  cursor.style.left = e.clientX + "px";
-  cursor.style.top = e.clientY + "px";
-});
-</script>
 
 </body>
 </html>
