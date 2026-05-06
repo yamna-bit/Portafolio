@@ -1,114 +1,1136 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Yamna Carrión</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Yamna Carrión — Portafolio</title>
+
+  <!-- Fuentes: Bebas Neue para el nombre grande, DM Serif para títulos elegantes, DM Mono para detalles -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ============================================================
+       VARIABLES GLOBALES — paleta y tipografía
+       ============================================================ */
+    :root {
+      --negro:        #080808;
+      --negro-medio:  #111111;
+      --negro-suave:  #1a1a1a;
+      --rosado:       #ff4375;
+      --rosado-dim:   rgba(255, 67, 117, 0.15);
+      --rosado-glow:  rgba(255, 67, 117, 0.06);
+      --blanco:       #f2ede8;
+      --blanco-dim:   rgba(242, 237, 232, 0.45);
+      --blanco-medio: rgba(242, 237, 232, 0.75);
+
+      --fuente-display: 'Bebas Neue', sans-serif;
+      --fuente-serif:   'DM Serif Display', serif;
+      --fuente-mono:    'DM Mono', monospace;
+
+      --curva-suave:  cubic-bezier(0.16, 1, 0.3, 1);
+      --curva-entrada: cubic-bezier(0.76, 0, 0.24, 1);
+    }
+
+    /* ============================================================
+       RESET BASE
+       ============================================================ */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      font-size: 16px;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--negro);
+      color: var(--blanco);
+      font-family: var(--fuente-mono);
+      overflow: hidden;       /* se activa scroll por sección */
+      cursor: none;
+      min-height: 100vh;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* ============================================================
+       CURSOR PERSONALIZADO — bolita rosada
+       ============================================================ */
+    .cursor {
+      position: fixed;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--rosado);
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+      transition: width 0.35s var(--curva-suave),
+                  height 0.35s var(--curva-suave),
+                  opacity 0.3s;
+      mix-blend-mode: difference;
+      will-change: left, top;
+    }
+
+    /* Cursor grande al pasar sobre elementos interactivos */
+    .cursor.grande {
+      width: 44px;
+      height: 44px;
+      opacity: 0.65;
+    }
+
+    /* ============================================================
+       LOADER — tres puntos pulsantes
+       ============================================================ */
+    #loader {
+      position: fixed;
+      inset: 0;
+      background: var(--negro);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9000;
+      transition: opacity 0.7s var(--curva-suave),
+                  visibility 0.7s;
+    }
+
+    #loader.oculto {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .loader-puntos {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .loader-puntos span {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--rosado);
+      animation: puntoPulso 1.3s var(--curva-entrada) infinite;
+    }
+
+    .loader-puntos span:nth-child(2) { animation-delay: 0.22s; }
+    .loader-puntos span:nth-child(3) { animation-delay: 0.44s; }
+
+    @keyframes puntoPulso {
+      0%, 100% { opacity: 0.2; transform: scale(0.6); }
+      50%       { opacity: 1;   transform: scale(1.3); }
+    }
+
+    /* ============================================================
+       OVERLAY DE TRANSICIÓN ENTRE SECCIONES — cortina rosada
+       ============================================================ */
+    #cortina {
+      position: fixed;
+      inset: 0;
+      background: var(--rosado);
+      z-index: 8000;
+      transform: scaleY(0);
+      transform-origin: bottom;
+      pointer-events: none;
+    }
+
+    /* ============================================================
+       CORAZONES FLOTANTES — fondo animado
+       ============================================================ */
+    #corazones {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .corazon {
+      position: absolute;
+      font-family: var(--fuente-mono);
+      color: var(--rosado);
+      opacity: 0;
+      user-select: none;
+      animation: flotarCorazon linear infinite;
+    }
+
+    @keyframes flotarCorazon {
+      0%   { opacity: 0;    transform: translateY(0)   rotate(var(--rot)); }
+      12%  { opacity: 0.3; }
+      88%  { opacity: 0.15; }
+      100% { opacity: 0;    transform: translateY(-115vh) rotate(calc(var(--rot) + 25deg)); }
+    }
+
+    /* ============================================================
+       SECCIONES — sistema de páginas SPA
+       ============================================================ */
+    .seccion {
+      position: fixed;
+      inset: 0;
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: opacity 0.5s var(--curva-suave);
+      overflow-y: auto;
+      overflow-x: hidden;
+    }
+
+    /* La sección activa es visible */
+    .seccion.activa {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: all;
+    }
+
+    /* ============================================================
+       SECCIÓN HOME — página principal
+       ============================================================ */
+    #home {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      z-index: 1;
+      padding: 2rem;
+    }
+
+    /* Navegación fija arriba a la derecha */
+    .nav-principal {
+      position: fixed;
+      top: 2.2rem;
+      right: 2.8rem;
+      display: flex;
+      gap: 2.5rem;
+      z-index: 100;
+      opacity: 0;
+      transform: translateY(-8px);
+      transition: opacity 0.8s var(--curva-suave) 1.2s,
+                  transform 0.8s var(--curva-suave) 1.2s;
+    }
+
+    .nav-principal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .nav-link {
+      font-family: var(--fuente-mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.18em;
+      text-transform: lowercase;
+      color: var(--blanco-dim);
+      position: relative;
+      transition: color 0.3s;
+      cursor: none;
+    }
+
+    /* Línea de subrayado animada */
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -3px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: var(--rosado);
+      transition: width 0.4s var(--curva-suave);
+    }
+
+    .nav-link:hover {
+      color: var(--rosado);
+    }
+
+    .nav-link:hover::after {
+      width: 100%;
+    }
+
+    /* Contenedor del nombre con aparición suave */
+    .contenedor-nombre {
+      text-align: center;
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 1s var(--curva-suave) 0.6s,
+                  transform 1s var(--curva-suave) 0.6s;
+      position: relative;
+      z-index: 2;
+    }
+
+    .contenedor-nombre.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Nombre principal — muy grande */
+    .nombre-yamna {
+      font-family: var(--fuente-display);
+      font-size: clamp(6rem, 18vw, 16rem);
+      font-weight: 400;           /* Bebas Neue no tiene bold real */
+      letter-spacing: 0.04em;
+      line-height: 0.85;
+      display: flex;
+      gap: 0.02em;
+      cursor: none;
+    }
+
+    /* Cada letra individual para el efecto de collage */
+    .letra {
+      display: inline-block;
+      color: var(--blanco);
+      will-change: transform;
+      transition: color 0.45s ease,
+                  transform 0.7s var(--curva-suave);
+    }
+
+    /* Letra afectada por el cursor */
+    .letra.afectada {
+      color: var(--rosado);
+    }
+
+    /* Apellido en serif cursiva, más pequeño */
+    .apellido {
+      font-family: var(--fuente-serif);
+      font-style: italic;
+      font-size: clamp(1.5rem, 4.5vw, 3.8rem);
+      color: var(--rosado);
+      letter-spacing: 0.12em;
+      margin-top: 0.4rem;
+      display: block;
+    }
+
+    /* Tagline minúscula */
+    .tagline {
+      font-family: var(--fuente-mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.22em;
+      color: var(--blanco-dim);
+      margin-top: 1.8rem;
+      text-transform: lowercase;
+    }
+
+    /* ============================================================
+       CABECERA INTERIOR — para páginas de proyectos y sobre mí
+       ============================================================ */
+    .cabecera-pagina {
+      position: sticky;
+      top: 0;
+      left: 0;
+      right: 0;
+      padding: 1.6rem 2.8rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 50;
+      background: linear-gradient(to bottom, var(--negro) 60%, transparent);
+    }
+
+    .boton-volver {
+      font-family: var(--fuente-mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.14em;
+      color: var(--blanco-dim);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: color 0.3s;
+      cursor: none;
+    }
+
+    .boton-volver::before {
+      content: '←';
+      color: var(--rosado);
+    }
+
+    .boton-volver:hover {
+      color: var(--rosado);
+    }
+
+    .logo-pagina {
+      font-family: var(--fuente-serif);
+      font-style: italic;
+      font-size: 1rem;
+      color: var(--rosado);
+    }
+
+    /* ============================================================
+       SECCIÓN PROYECTOS
+       ============================================================ */
+    #proyectos {
+      z-index: 1;
+    }
+
+    .contenido-proyectos {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 2.8rem 5rem;
+    }
+
+    /* Encabezado grande de la sección */
+    .titulo-seccion {
+      font-family: var(--fuente-display);
+      font-size: clamp(3.5rem, 10vw, 9rem);
+      line-height: 0.85;
+      color: var(--blanco);
+      margin-bottom: 3.5rem;
+      padding-top: 1rem;
+    }
+
+    .titulo-seccion em {
+      color: var(--rosado);
+      font-family: var(--fuente-serif);
+      font-style: italic;
+      font-size: 0.55em;    /* más pequeño que el display */
+      display: block;
+      letter-spacing: 0.05em;
+      margin-top: 0.2em;
+    }
+
+    /* Grilla de tarjetas de proyectos */
+    .grilla-proyectos {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1px;
+      background: rgba(255, 67, 117, 0.1); /* separadores sutiles */
+    }
+
+    /* Tarjeta de proyecto */
+    .tarjeta-proyecto {
+      background: var(--negro-medio);
+      padding: 2.2rem;
+      position: relative;
+      overflow: hidden;
+      cursor: none;
+      display: block;
+      transition: background 0.4s;
+    }
+
+    /* Brillo rosado al pasar el mouse */
+    .tarjeta-proyecto::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: var(--rosado-glow);
+      opacity: 0;
+      transition: opacity 0.4s;
+    }
+
+    .tarjeta-proyecto:hover {
+      background: #141414;
+    }
+
+    .tarjeta-proyecto:hover::before {
+      opacity: 1;
+    }
+
+    /* Año del proyecto */
+    .proyecto-año {
+      font-family: var(--fuente-mono);
+      font-size: 0.58rem;
+      letter-spacing: 0.22em;
+      color: var(--rosado);
+      margin-bottom: 1rem;
+      display: block;
+    }
+
+    /* Nombre del proyecto */
+    .proyecto-nombre {
+      font-family: var(--fuente-display);
+      font-size: 2rem;
+      letter-spacing: 0.04em;
+      color: var(--blanco);
+      margin-bottom: 0.8rem;
+      transition: color 0.3s;
+    }
+
+    .tarjeta-proyecto:hover .proyecto-nombre {
+      color: var(--rosado);
+    }
+
+    /* Descripción breve */
+    .proyecto-desc {
+      font-family: var(--fuente-mono);
+      font-size: 0.72rem;
+      line-height: 1.85;
+      color: var(--blanco-dim);
+    }
+
+    /* Tags de técnicas o materiales */
+    .proyecto-tags {
+      margin-top: 1.5rem;
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .tag {
+      font-family: var(--fuente-mono);
+      font-size: 0.56rem;
+      letter-spacing: 0.1em;
+      color: var(--rosado);
+      border: 1px solid rgba(255, 67, 117, 0.3);
+      padding: 0.2rem 0.6rem;
+    }
+
+    /* Flecha diagonal — aparece al hacer hover */
+    .proyecto-flecha {
+      position: absolute;
+      bottom: 1.8rem;
+      right: 1.8rem;
+      font-size: 1.1rem;
+      color: var(--rosado);
+      opacity: 0;
+      transform: translate(-5px, 5px);
+      transition: opacity 0.3s, transform 0.4s var(--curva-suave);
+    }
+
+    .tarjeta-proyecto:hover .proyecto-flecha {
+      opacity: 1;
+      transform: translate(0, 0);
+    }
+
+    /* ============================================================
+       SECCIÓN SOBRE MÍ
+       ============================================================ */
+    #sobre-mi {
+      z-index: 1;
+    }
+
+    .contenido-sobre {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 0 2.8rem 6rem;
+    }
+
+    /* Bloque de introducción personal */
+    .intro-personal {
+      margin-bottom: 5rem;
+    }
+
+    .etiqueta {
+      font-family: var(--fuente-mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.28em;
+      color: var(--rosado);
+      text-transform: uppercase;
+      display: block;
+      margin-bottom: 1.8rem;
+    }
+
+    .titulo-sobre {
+      font-family: var(--fuente-serif);
+      font-style: italic;
+      font-size: clamp(2rem, 5.5vw, 4.2rem);
+      line-height: 1.15;
+      color: var(--blanco);
+      margin-bottom: 2rem;
+    }
+
+    .parrafo-bio {
+      font-family: var(--fuente-mono);
+      font-size: 0.8rem;
+      line-height: 2;
+      color: var(--blanco-dim);
+      max-width: 560px;
+      font-weight: 300;
+    }
+
+    /* Grid de habilidades + software lado a lado */
+    .grid-habilidades {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: rgba(255, 67, 117, 0.1);
+      margin-bottom: 5rem;
+    }
+
+    .celda {
+      background: var(--negro);
+      padding: 2.4rem;
+    }
+
+    .celda-titulo {
+      font-family: var(--fuente-mono);
+      font-size: 0.58rem;
+      letter-spacing: 0.26em;
+      color: var(--rosado);
+      text-transform: uppercase;
+      display: block;
+      margin-bottom: 1.6rem;
+    }
+
+    /* Lista simple con punto rosado */
+    .lista-items {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.7rem;
+    }
+
+    .lista-items li {
+      font-family: var(--fuente-mono);
+      font-size: 0.75rem;
+      font-weight: 300;
+      color: var(--blanco-medio);
+      padding-left: 1rem;
+      position: relative;
+    }
+
+    .lista-items li::before {
+      content: '·';
+      position: absolute;
+      left: 0;
+      color: var(--rosado);
+      font-size: 1.2em;
+      line-height: 1;
+    }
+
+    /* Línea de tiempo de experiencias */
+    .seccion-experiencia {
+      margin-bottom: 5rem;
+    }
+
+    /* Ítem de experiencia con línea vertical rosada */
+    .exp-item {
+      border-left: 1px solid rgba(255, 67, 117, 0.2);
+      padding: 0 0 2.2rem 2rem;
+      position: relative;
+    }
+
+    /* Punto en la línea */
+    .exp-item::before {
+      content: '';
+      position: absolute;
+      left: -3px;
+      top: 7px;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--rosado);
+    }
+
+    .exp-item:last-child {
+      padding-bottom: 0;
+    }
+
+    .exp-titulo {
+      font-family: var(--fuente-serif);
+      font-size: 1.05rem;
+      color: var(--blanco);
+      margin-bottom: 0.3rem;
+    }
+
+    .exp-subtitulo {
+      font-family: var(--fuente-mono);
+      font-size: 0.68rem;
+      font-weight: 300;
+      color: var(--blanco-dim);
+      margin-bottom: 0.25rem;
+    }
+
+    .exp-año {
+      font-family: var(--fuente-mono);
+      font-size: 0.58rem;
+      letter-spacing: 0.12em;
+      color: var(--rosado);
+    }
+
+    /* Botones de contacto */
+    .contacto-links {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .link-contacto {
+      font-family: var(--fuente-mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      color: var(--blanco-dim);
+      border: 1px solid rgba(255, 67, 117, 0.28);
+      padding: 0.75rem 1.5rem;
+      transition: color 0.3s, border-color 0.3s, background 0.3s;
+      cursor: none;
+    }
+
+    .link-contacto:hover {
+      color: var(--rosado);
+      border-color: var(--rosado);
+      background: var(--rosado-glow);
+    }
+
+    /* ============================================================
+       RESPONSIVE — ajustes para móvil
+       ============================================================ */
+    @media (max-width: 640px) {
+      .nav-principal {
+        top: 1.2rem;
+        right: 1.4rem;
+        gap: 1.6rem;
+      }
+
+      .grid-habilidades {
+        grid-template-columns: 1fr;
+      }
+
+      .grilla-proyectos {
+        grid-template-columns: 1fr;
+      }
+
+      .cabecera-pagina {
+        padding: 1.2rem 1.4rem;
+      }
+
+      .contenido-proyectos,
+      .contenido-sobre {
+        padding-left: 1.4rem;
+        padding-right: 1.4rem;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-<!-- HERO -->
-<section class="hero">
-  <h1 class="nombre">CARRIÓN</h1>
-  <h2 class="sub">YAMNA</h2>
+  <!-- ── CURSOR PERSONALIZADO ─────────────────────────────── -->
+  <div class="cursor" id="cursor"></div>
 
-  <div class="hearts">
-    <span><3</span><span><3</span><span><3</span>
-    <span><3</span><span><3</span>
+  <!-- ── LOADER INICIAL — tres puntos ────────────────────── -->
+  <div id="loader">
+    <div class="loader-puntos">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
   </div>
-</section>
 
+  <!-- ── CORTINA DE TRANSICIÓN ENTRE SECCIONES ───────────── -->
+  <div id="cortina"></div>
 
-<!-- ABOUT (TEXTO EXACTO) -->
-<section class="about">
-  <h2>ABOUT ME</h2>
+  <!-- ── CORAZONES FLOTANTES EN EL FONDO ─────────────────── -->
+  <div id="corazones"></div>
 
-  <p>
-    Holi<3 <br><br>
+  <!-- ══════════════════════════════════════════════════════
+       SECCIÓN 1 — HOME
+       ══════════════════════════════════════════════════════ -->
+  <section class="seccion activa" id="home">
 
-    Soy Yamna Carrión estudiante de diseño industrial con intereses
-    en el diseño de interacción digital, en este ultimo tiempo e
-    ido descubriendo una nueva parte de sieñar mediante ala
-    programación creativa me gusta mucho los materiales fisicos
-    pero al mismo tiempo al ir expirementando con la programación
-    me ha gustado un montón
-  </p>
+    <!-- Navegación fija -->
+    <nav class="nav-principal" id="nav">
+      <button class="nav-link" onclick="irA('proyectos')">proyectos</button>
+      <button class="nav-link" onclick="irA('sobre-mi')">sobre mí</button>
+    </nav>
 
-  <div class="skills">
-    <p>Diseño ux/ui</p>
-    <p>Materialidades</p>
-    <p>Programación</p>
-    <p>prototipado diseño industrial</p>
-  </div>
-</section>
+    <!-- Nombre interactivo con efecto collage -->
+    <div class="contenedor-nombre" id="contenedorNombre">
 
+      <h1 class="nombre-yamna" id="nombreYamna">
+        <span class="letra">Y</span>
+        <span class="letra">A</span>
+        <span class="letra">M</span>
+        <span class="letra">N</span>
+        <span class="letra">A</span>
+      </h1>
 
-<!-- HABILIDADES -->
-<section class="habilidades">
-  <h2>HABILIDADES</h2>
+      <span class="apellido">Carrión</span>
+      <p class="tagline">diseño industrial · interacción · materia</p>
 
-  <div class="grid">
-    <div>Observación</div>
-    <div>Prototipado</div>
-    <div>Pensamiento crítico</div>
-    <div>Experimentación con materiales</div>
-    <div>Organización</div>
-  </div>
-</section>
+    </div>
+  </section>
 
+  <!-- ══════════════════════════════════════════════════════
+       SECCIÓN 2 — PROYECTOS
+       ══════════════════════════════════════════════════════ -->
+  <section class="seccion" id="proyectos">
 
-<!-- SOFTWARE -->
-<section class="software">
-  <h2>SOFTWARE</h2>
+    <div class="cabecera-pagina">
+      <button class="boton-volver" onclick="irA('home')">volver</button>
+      <span class="logo-pagina">Yamna</span>
+    </div>
 
-  <div class="grid">
-    <div>Rhinoceros</div>
-    <div>AutoCad</div>
-    <div>Illustraitor</div>
-    <div>Inventor</div>
-    <div>P5js</div>
-    <div>Indesign</div>
-  </div>
-</section>
+    <div class="contenido-proyectos">
 
+      <h2 class="titulo-seccion">
+        TRABAJOS
+        <em>seleccionados</em>
+      </h2>
 
-<!-- EXPERIENCIA -->
-<section class="experiencia">
-  <h2>EXPERIENCIA Y PARTICIPACIÓN</h2>
+      <!-- Grilla de proyectos — se puede agregar más tarjetas fácilmente -->
+      <div class="grilla-proyectos">
 
-  <p>
-    Expositora en colaboración - Palacio Pereira<br>
-    Exposición colectiva de biomateriales Junio de 2025.
-  </p>
+        <!-- ABRUTA -->
+        <div class="tarjeta-proyecto">
+          <span class="proyecto-año">2025</span>
+          <div class="proyecto-nombre">ABRUTA</div>
+          <p class="proyecto-desc">
+            Proyecto de indumentaria que explora la tensión entre lo orgánico y lo estructural, combinando biomateriales con formas arquitectónicas. Presentado en el Palacio Pereira, Santiago.
+          </p>
+          <div class="proyecto-tags">
+            <span class="tag">biomateriales</span>
+            <span class="tag">indumentaria</span>
+            <span class="tag">prototipado</span>
+          </div>
+          <span class="proyecto-flecha">↗</span>
+        </div>
 
-  <p>
-    Participante - 6° Festival de Cultura, Arte y Tecnología “Primavera Hacker”<br>
-    Proyecto AND-Y 2025<br>
-    rol: colaboración en diseño de carcasa y programación.
-  </p>
+        <!-- VELLUM -->
+        <div class="tarjeta-proyecto">
+          <span class="proyecto-año">2025</span>
+          <div class="proyecto-nombre">VELLUM</div>
+          <p class="proyecto-desc">
+            Luminaria inspirada en la flor de loto, compuesta por tres piezas en acero plegado con pintura electrostática. Regula la intensidad de luz a través de orificios en su estructura.
+          </p>
+          <div class="proyecto-tags">
+            <span class="tag">acero</span>
+            <span class="tag">luminaria</span>
+            <span class="tag">metal</span>
+          </div>
+          <span class="proyecto-flecha">↗</span>
+        </div>
 
-  <p>
-    Voluntariado de intercambio cultural<br>
-    Globaliza - Relaciones Internacionales.
-  </p>
+        <!-- AND-Y -->
+        <div class="tarjeta-proyecto">
+          <span class="proyecto-año">2025</span>
+          <div class="proyecto-nombre">AND-Y</div>
+          <p class="proyecto-desc">
+            Robot de 11 cm programado con Arduino R4 Minima. Funciona como contador de datos curiosos, activando audios según la proximidad detectada por sensor ultrasónico.
+          </p>
+          <div class="proyecto-tags">
+            <span class="tag">arduino</span>
+            <span class="tag">programación</span>
+            <span class="tag">interacción</span>
+          </div>
+          <span class="proyecto-flecha">↗</span>
+        </div>
 
-  <p>
-    2024-2 - 2025-1<br>
-    Curso de profundización de visual merchandising
-  </p>
-</section>
+        <!-- FLUIDEZ -->
+        <div class="tarjeta-proyecto">
+          <span class="proyecto-año">2024</span>
+          <div class="proyecto-nombre">FLUIDEZ</div>
+          <p class="proyecto-desc">
+            Macetero de yeso creado desde un molde diseñado en Rhinoceros, impreso en 3D y documentado con planos técnicos en AutoCAD.
+          </p>
+          <div class="proyecto-tags">
+            <span class="tag">rhinoceros</span>
+            <span class="tag">yeso</span>
+            <span class="tag">3D print</span>
+          </div>
+          <span class="proyecto-flecha">↗</span>
+        </div>
 
+        <!-- VELADOR -->
+        <div class="tarjeta-proyecto">
+          <span class="proyecto-año">2024</span>
+          <div class="proyecto-nombre">VELADOR</div>
+          <p class="proyecto-desc">
+            Velador construido principalmente en madera con técnicas de encaje y encolado, complementado con estructura metálica soldada que aporta estabilidad y contraste material.
+          </p>
+          <div class="proyecto-tags">
+            <span class="tag">madera</span>
+            <span class="tag">soldadura</span>
+            <span class="tag">metal</span>
+          </div>
+          <span class="proyecto-flecha">↗</span>
+        </div>
 
-<!-- CONTACTO -->
-<section class="contacto">
-  <h2>CONTACTO</h2>
-  <p>Instagram</p>
-  <p>Mail</p>
-  <p>GitHub</p>
-</section>
+        <!-- RENDERIZADO SITUACIONAL -->
+        <div class="tarjeta-proyecto">
+          <span class="proyecto-año">2023</span>
+          <div class="proyecto-nombre">RENDER SITUACIONAL</div>
+          <p class="proyecto-desc">
+            Ejercicio de modelado preciso de un lápiz a escala real, con aplicación de materiales, luces y sombras en V-Ray para generar un entorno virtual realista y coherente.
+          </p>
+          <div class="proyecto-tags">
+            <span class="tag">rhinoceros</span>
+            <span class="tag">v-ray</span>
+            <span class="tag">render</span>
+          </div>
+          <span class="proyecto-flecha">↗</span>
+        </div>
 
+      </div>
+    </div>
+  </section>
 
-<script src="script.js"></script>
+  <!-- ══════════════════════════════════════════════════════
+       SECCIÓN 3 — SOBRE MÍ
+       ══════════════════════════════════════════════════════ -->
+  <section class="seccion" id="sobre-mi">
+
+    <div class="cabecera-pagina">
+      <button class="boton-volver" onclick="irA('home')">volver</button>
+      <span class="logo-pagina">Yamna</span>
+    </div>
+
+    <div class="contenido-sobre">
+
+      <!-- Introducción personal -->
+      <div class="intro-personal">
+        <span class="etiqueta">01 — sobre mí</span>
+
+        <h2 class="titulo-sobre">
+          Diseño con propósito,<br>materia y código.
+        </h2>
+
+        <p class="parrafo-bio">
+          Hola, soy Yamna Carrión, tengo 21 años y estudio Diseño con mención Industrial en la Universidad Diego Portales. Desde pequeña me ha movido la curiosidad: observar, preguntar y aprender siempre han sido parte de mí. Llegué al diseño casi por casualidad, y me sorprendió descubrir una disciplina que reunía todo lo que me apasiona. Para mí, el diseño está en todo y en todos — es una forma de mirar el mundo con sentido crítico, conectando realidades que a veces parecen lejanas. Valoro el error como parte del proceso, porque cada equivocación enseña y permite avanzar.
+        </p>
+      </div>
+
+      <!-- Habilidades y software -->
+      <div class="grid-habilidades">
+        <div class="celda">
+          <span class="celda-titulo">habilidades</span>
+          <ul class="lista-items">
+            <li>Observación</li>
+            <li>Prototipado</li>
+            <li>Pensamiento crítico</li>
+            <li>Experimentación con materiales</li>
+            <li>Organización</li>
+          </ul>
+        </div>
+        <div class="celda">
+          <span class="celda-titulo">software</span>
+          <ul class="lista-items">
+            <li>Rhinoceros</li>
+            <li>AutoCAD</li>
+            <li>Illustrator</li>
+            <li>Inventor</li>
+            <li>P5.js</li>
+            <li>Arduino</li>
+            <li>InDesign</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Experiencias y participaciones -->
+      <div class="seccion-experiencia">
+        <span class="etiqueta">02 — experiencia y participación</span>
+
+        <div class="exp-item">
+          <div class="exp-titulo">Expositora — Palacio Pereira</div>
+          <div class="exp-subtitulo">Exposición colectiva de biomateriales</div>
+          <div class="exp-año">junio 2025</div>
+        </div>
+
+        <div class="exp-item">
+          <div class="exp-titulo">6° Festival Primavera Hacker</div>
+          <div class="exp-subtitulo">Proyecto AND-Y · diseño de carcasa y programación</div>
+          <div class="exp-año">2025</div>
+        </div>
+
+        <div class="exp-item">
+          <div class="exp-titulo">Voluntariado de intercambio cultural</div>
+          <div class="exp-subtitulo">Globaliza — Relaciones Internacionales</div>
+          <div class="exp-año">2024 – 2025</div>
+        </div>
+
+        <div class="exp-item">
+          <div class="exp-titulo">Curso de visual merchandising</div>
+          <div class="exp-subtitulo">Curso de profundización</div>
+          <div class="exp-año">2025</div>
+        </div>
+      </div>
+
+      <!-- Contacto -->
+      <div>
+        <span class="etiqueta">03 — contacto</span>
+        <div class="contacto-links">
+          <a href="https://instagram.com/yamnadesign_" target="_blank" class="link-contacto">
+            @yamnadesign_
+          </a>
+          <a href="mailto:yamna.designme@gmail.com" class="link-contacto">
+            yamna.designme@gmail.com
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════
+       JAVASCRIPT — cursor, corazones, letras, transiciones
+       ══════════════════════════════════════════════════════ -->
+  <script>
+    /* ── CURSOR SUAVE ──────────────────────────────────────
+       El cursor sigue al mouse con un pequeño retraso (lerp)
+       para que se sienta fluido y no mecánico              */
+    const cursor = document.getElementById('cursor');
+    let mouseX = -100, mouseY = -100;
+    let cursorX = -100, cursorY = -100;
+
+    document.addEventListener('mousemove', e => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+    });
+
+    /* Loop de animación del cursor */
+    (function animarCursor() {
+      cursorX += (mouseX - cursorX) * 0.16;
+      cursorY += (mouseY - cursorY) * 0.16;
+      cursor.style.left = cursorX + 'px';
+      cursor.style.top  = cursorY + 'px';
+      requestAnimationFrame(animarCursor);
+    })();
+
+    /* Agrandar cursor al pasar sobre elementos interactivos */
+    document.querySelectorAll('button, a, .tarjeta-proyecto, .letra').forEach(el => {
+      el.addEventListener('mouseenter', () => cursor.classList.add('grande'));
+      el.addEventListener('mouseleave', () => cursor.classList.remove('grande'));
+    });
+
+    /* ── CORAZONES FLOTANTES ───────────────────────────────
+       Crea elementos <3 que flotan de abajo hacia arriba
+       con posición, tamaño y duración aleatorias           */
+    function crearCorazon() {
+      const bg = document.getElementById('corazones');
+      const el = document.createElement('span');
+      el.className = 'corazon';
+      el.textContent = '<3';
+
+      const x        = Math.random() * 100;           /* posición horizontal % */
+      const duracion = 13 + Math.random() * 18;       /* duración en segundos  */
+      const delay    = Math.random() * 8;             /* retraso inicial       */
+      const tamaño   = 0.55 + Math.random() * 0.75;  /* escala del texto      */
+      const rotacion = (Math.random() - 0.5) * 35;   /* rotación inicial      */
+
+      el.style.cssText = `
+        left: ${x}%;
+        bottom: -50px;
+        font-size: ${tamaño}rem;
+        animation-duration: ${duracion}s;
+        animation-delay: ${delay}s;
+        --rot: ${rotacion}deg;
+      `;
+
+      bg.appendChild(el);
+
+      /* Eliminar el elemento cuando termine su animación */
+      setTimeout(() => el.remove(), (duracion + delay) * 1000);
+    }
+
+    /* Generar varios corazones iniciales y luego uno cada cierto tiempo */
+    function iniciarCorazones() {
+      for (let i = 0; i < 20; i++) crearCorazon();
+      setInterval(crearCorazon, 1100);
+    }
+
+    /* ── EFECTO COLLAGE EN LAS LETRAS ─────────────────────
+       Al mover el cursor sobre el nombre, las letras
+       cercanas se desplazan de forma orgánica y suave.
+       Al alejar, vuelven a su posición original.          */
+    function iniciarEfectoLetras() {
+      const nombreEl  = document.getElementById('nombreYamna');
+      const letras    = nombreEl.querySelectorAll('.letra');
+
+      /* Al mover el mouse sobre el contenedor del nombre */
+      nombreEl.addEventListener('mousemove', e => {
+        cursor.classList.add('grande');
+
+        letras.forEach(letra => {
+          const rect  = letra.getBoundingClientRect();
+          const centroX = rect.left + rect.width / 2;
+          const centroY = rect.top  + rect.height / 2;
+
+          const dx   = e.clientX - centroX;
+          const dy   = e.clientY - centroY;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          const radio = 200; /* radio de influencia en px */
+
+          if (dist < radio) {
+            const fuerza  = 1 - dist / radio;
+            const angulo  = Math.atan2(dy, dx);
+
+            /* Desplazamiento en dirección contraria al cursor */
+            const empujeX  = -Math.cos(angulo) * fuerza * 60;
+            const empujeY  = -Math.sin(angulo) * fuerza * 42;
+            /* Rotación suave proporcional a la fuerza */
+            const rotacion = (Math.random() - 0.5) * fuerza * 18;
+            /* Leve escala */
+            const escala   = 1 + fuerza * 0.12;
+
+            letra.style.transform = `translate(${empujeX}px, ${empujeY}px) rotate(${rotacion}deg) scale(${escala})`;
+            letra.classList.add('afectada');
+          }
+        });
+      });
+
+      /* Al salir del área, las letras vuelven suavemente */
+      nombreEl.addEventListener('mouseleave', () => {
+        cursor.classList.remove('grande');
+        letras.forEach(letra => {
+          letra.style.transform = '';
+          letra.classList.remove('afectada');
+        });
+      });
+    }
+
+    /* ── LOADER Y ENTRADA PROGRESIVA ──────────────────────
+       Espera 1.8s → oculta el loader → muestra el nombre
+       y la navegación con una transición suave           */
+    function iniciarLoader() {
+      const loader          = document.getElementById('loader');
+      const contenedorNombre = document.getElementById('contenedorNombre');
+      const nav             = document.getElementById('nav');
+
+      setTimeout(() => {
+        /* Ocultar loader */
+        loader.classList.add('oculto');
+
+        /* Mostrar nombre y nav después de que el loader desaparezca */
+        setTimeout(() => {
+          contenedorNombre.classList.add('visible');
+          nav.classList.add('visible');
+          iniciarCorazones();
+          iniciarEfectoLetras();
+        }, 500);
+
+      }, 1800);
+    }
+
+    /* ── NAVEGACIÓN ENTRE SECCIONES ───────────────────────
+       Usa una cortina rosada para transicionar suavemente
+       entre home, proyectos y sobre mí                   */
+    const cortina = document.getElementById('cortina');
+    let seccionActual = 'home';
+
+    function irA(idDestino) {
+      if (idDestino === seccionActual) return;
+
+      /* 1. Cortina sube (entra) */
+      cortina.style.transition = 'transform 0.45s cubic-bezier(0.76, 0, 0.24, 1)';
+      cortina.style.transformOrigin = 'bottom';
+      cortina.style.transform = 'scaleY(1)';
+
+      setTimeout(() => {
+        /* 2. Cambiar sección visible */
+        document.querySelectorAll('.seccion').forEach(s => s.classList.remove('activa'));
+        document.getElementById(idDestino).classList.add('activa');
+        seccionActual = idDestino;
+
+        /* Resetear scroll de la nueva sección */
+        document.getElementById(idDestino).scrollTop = 0;
+
+        /* 3. Cortina baja (sale) */
+        cortina.style.transformOrigin = 'top';
+        cortina.style.transition = 'transform 0.5s cubic-bezier(0.16, 1, 0.3, 1)';
+        cortina.style.transform = 'scaleY(0)';
+
+      }, 440);
+    }
+
+    /* ── ARRANQUE ─────────────────────────────────────────
+       Iniciar todo cuando el DOM esté listo              */
+    document.addEventListener('DOMContentLoaded', iniciarLoader);
+  </script>
+
 </body>
 </html>
