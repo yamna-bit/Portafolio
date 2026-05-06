@@ -4,44 +4,49 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Yamna</title>
+  <!-- Título de la página -->
+  <title>Home</title>
 
+  <!-- Conexión al CSS global -->
   <link rel="stylesheet" href="style.css">
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
 </head>
 
 <body>
 
+<!-- =========================
+ CURSOR PERSONALIZADO
+ (se mueve con JavaScript)
+========================= -->
 <div class="cursor" id="cursor"></div>
 
-<!-- NAV -->
-<button class="ui-btn about-btn" onclick="location.href='about.html'">ABOUT</button>
-<button class="ui-btn projects-btn" onclick="location.href='projects.html'">PROYECTS</button>
+<!-- =========================
+ BOTONES DE NAVEGACIÓN
+========================= -->
 
-<!-- P5 CANVAS -->
-<script src="script.js"></script>
+<!-- lleva a ABOUT -->
+<button class="ui-btn about-btn" onclick="location.href='about.html'">
+  ABOUT
+</button>
 
-<!-- HERO -->
-<section class="hero">
+<!-- lleva a PROYECTS -->
+<button class="ui-btn projects-btn" onclick="location.href='proyects.html'">
+  PROYECTS
+</button>
 
-  <div class="hero-img">
-    <img src="imagen/yo.jpg" alt="Yamna">
-  </div>
-
-  <h1>Holi <3</h1>
-
-  <p>Diseño Industrial · Interacción · Programación creativa</p>
-
-</section>
-
+<!-- =========================
+ CURSOR MOVIMIENTO
+========================= -->
 <script>
+
+// selecciona el cursor del DOM
 const cursor = document.getElementById("cursor");
 
+// mueve el cursor con el mouse
 document.addEventListener("mousemove", (e) => {
   cursor.style.left = e.clientX + "px";
   cursor.style.top = e.clientY + "px";
 });
+
 </script>
 
 </body>
