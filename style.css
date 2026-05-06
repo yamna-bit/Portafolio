@@ -1,6 +1,5 @@
 :root {
   --pink: #ff2d78;
-  --pink2: #ff80b2;
   --orange: #ff8c00;
   --yellow: #ffb800;
 }
@@ -13,11 +12,12 @@ body {
   margin: 0;
   font-family: Arial;
   cursor: none;
+  background: white;
   overflow-x: hidden;
 }
 
 /* =========================
-   CURSOR GLOBAL
+   CURSOR
 ========================= */
 
 .cursor {
@@ -32,7 +32,7 @@ body {
 }
 
 /* =========================
-   BOTONES
+   BOTONES UI
 ========================= */
 
 .ui-btn {
@@ -48,14 +48,12 @@ body {
 
   font-family: Arial Black;
   cursor: pointer;
-
   transition: 0.3s;
 }
 
 .ui-btn:hover {
   background: var(--pink);
   color: white;
-  transform: scale(1.05);
 }
 
 .about-btn {
@@ -63,7 +61,7 @@ body {
   left: 20px;
 }
 
-.proyects-btn {
+.projects-btn {
   top: 20px;
   right: 20px;
 }
@@ -72,152 +70,18 @@ body {
    ABOUT
 ========================= */
 
-.about-container {
-  padding: 120px 40px;
-  color: var(--pink);
-}
-
-.about-title {
-  font-size: 50px;
-  font-family: Arial Black;
-}
-
-.box-art {
-  border: 2px solid var(--pink);
-  border-radius: 20px;
-  padding: 15px;
-  margin-bottom: 15px;
-  background: rgba(255, 45, 120, 0.05);
-}
-
-.tag {
-  display: inline-block;
-  border: 2px solid var(--pink);
-  border-radius: 999px;
-  padding: 6px 10px;
-  margin: 5px;
-  font-size: 12px;
-}
-
-/* =========================
-   PROYECTS HEADER
-========================= */
-
-.proyects-header {
-  padding: 140px 40px 20px 40px;
-}
-
-.proyects-header h1 {
-  font-size: 64px;
-  margin: 0;
-  font-family: Arial Black;
-  color: var(--pink);
-}
-
-.proyects-header p {
-  color: var(--orange);
-  margin-top: 10px;
-}
-
-/* =========================
-   PROYECTS COLLAGE REAL
-========================= */
-
-.proyects-grid {
-  width: 100%;
-  min-height: 100vh;
-
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-
-  gap: 20px;
-
-  padding: 40px;
-  box-sizing: border-box;
-}
-
-.proyect-card {
-  height: 200px;
-
-  border-radius: 20px;
-
-  display: flex;
-  align-items: flex-end;
-
-  padding: 15px;
-
-  text-decoration: none;
-  font-family: Arial Black;
-
-  transition: 0.3s;
-}
-
-.proyect-card span {
-  font-size: 18px;
-}
-
-/* colores */
-.pink {
-  border: 2px solid var(--pink);
-  color: var(--pink);
-  background: rgba(255, 45, 120, 0.12);
-}
-
-.orange {
-  border: 2px solid var(--orange);
-  color: var(--orange);
-  background: rgba(255, 140, 0, 0.12);
-}
-
-.yellow {
-  border: 2px solid var(--yellow);
-  color: var(--yellow);
-  background: rgba(255, 184, 0, 0.12);
-}
-
-/* hover */
-.proyect-card:hover {
-  transform: scale(1.03);
-  filter: saturate(1.2);
-}
-
-/* =========================
-   HOME CANVAS FIX
-========================= */
-
-canvas {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 1;
-}
-
-canvas {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 0;
-}
-
-body {
-  background: white;
-}
-
 .about-editorial {
   display: grid;
   grid-template-columns: 320px 1fr;
   gap: 60px;
-
   padding: 140px 60px;
-
-  color: #ff2d78;
+  color: var(--pink);
 }
 
 .about-photo {
-  width: 100%;
   border-radius: 20px;
   overflow: hidden;
-  border: 2px solid #ff2d78;
+  border: 2px solid var(--pink);
 }
 
 .about-photo img {
@@ -242,9 +106,79 @@ body {
   line-height: 1.6;
 }
 
-@media (max-width: 900px) {
-  .about-editorial {
-    grid-template-columns: 1fr;
-    padding: 120px 20px;
-  }
+/* =========================
+   PROJECTS
+========================= */
+
+.projects-header {
+  padding: 140px 40px 20px 40px;
+}
+
+.projects-header h1 {
+  font-size: 64px;
+  margin: 0;
+  font-family: Arial Black;
+  color: var(--pink);
+}
+
+.projects-header p {
+  color: var(--orange);
+}
+
+.projects-grid {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+  padding: 40px;
+  box-sizing: border-box;
+}
+
+.project-card {
+  height: 200px;
+  border-radius: 20px;
+  display: flex;
+  align-items: flex-end;
+  padding: 15px;
+  font-family: Arial Black;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.project-card span {
+  font-size: 18px;
+}
+
+.pink {
+  border: 2px solid var(--pink);
+  color: var(--pink);
+  background: rgba(255, 45, 120, 0.12);
+}
+
+.orange {
+  border: 2px solid var(--orange);
+  color: var(--orange);
+  background: rgba(255, 140, 0, 0.12);
+}
+
+.yellow {
+  border: 2px solid var(--yellow);
+  color: var(--yellow);
+  background: rgba(255, 184, 0, 0.12);
+}
+
+.project-card:hover {
+  transform: scale(1.03);
+  filter: saturate(1.2);
+}
+
+/* =========================
+   CANVAS FIX
+========================= */
+
+canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 0;
 }
