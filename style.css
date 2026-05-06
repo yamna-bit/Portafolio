@@ -26,6 +26,63 @@ button {
   transition: 0.3s;
 }
 
+.projects-btn {
+  position: fixed;
+  top: 50px;
+  left: 16px;
+  z-index: 20;
+
+  background: transparent;
+  border: none;
+  color: #ff2d78;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.projects-panel {
+  position: fixed;
+  inset: 0;
+  background: rgba(255,255,255,0.95);
+  z-index: 30;
+
+  padding: 40px;
+  overflow-y: auto;
+}
+
+.hidden {
+  display: none;
+}
+
+.projects-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: Arial Black;
+  color: #ff2d78;
+}
+
+.grid {
+  margin-top: 40px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 20px;
+}
+
+.card {
+  height: 200px;
+  border: 2px solid #ff2d78;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 10px;
+}
+
+.card .img {
+  flex: 1;
+  background: pink;
+  margin-bottom: 10px;
+}
+
 button:hover {
   background: #ff2d78;
   color: white;
