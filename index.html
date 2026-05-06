@@ -3,8 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>Home</title>
+
   <link rel="stylesheet" href="style.css">
+
+  <!-- p5.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
 </head>
 
 <body>
@@ -14,11 +19,13 @@
 
 <!-- navegación -->
 <button onclick="location.href='about.html'">ABOUT</button>
-
-<!-- ✔ CORRECTO -->
 <button onclick="location.href='proyects.html'">PROYECTS</button>
 
+<!-- TU ANIMACIÓN VUELVE AQUÍ -->
+<script src="script.js"></script>
+
 <script>
+// cursor global
 const cursor = document.getElementById("cursor");
 
 document.addEventListener("mousemove", (e) => {
