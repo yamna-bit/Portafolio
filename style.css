@@ -115,3 +115,77 @@ canvas {
 .item:hover img {
   transform: scale(1.05);
 }
+
+
+.about-editorial {
+  padding: 120px 60px;
+}
+
+/* TITULO PRINCIPAL */
+.hero h1 {
+  font-size: 60px;
+  font-family: Arial Black;
+  color: #ff2d78;
+  margin: 0;
+  letter-spacing: 2px;
+}
+
+.hero p {
+  margin-top: 10px;
+  font-size: 14px;
+  opacity: 0.7;
+}
+
+/* GRID TIPO REVISTA */
+.grid {
+  margin-top: 60px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+}
+
+/* COLUMNAS */
+.col h2 {
+  font-family: Arial Black;
+  font-size: 16px;
+  color: #ff2d78;
+  margin-bottom: 10px;
+}
+
+.col p {
+  font-family: Arial;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* EXPERIENCIA */
+.experience {
+  margin-top: 80px;
+}
+
+.experience h2 {
+  font-family: Arial Black;
+  color: #ff2d78;
+  margin-bottom: 20px;
+}
+
+.experience p {
+  font-size: 14px;
+  line-height: 1.6;
+  margin-bottom: 15px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .about-editorial {
+    padding: 100px 20px;
+  }
+
+  .hero h1 {
+    font-size: 40px;
+  }
+}
