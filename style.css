@@ -4,18 +4,10 @@ body {
   font-family: Arial;
 }
 
-/* capa UI encima del canvas */
-.ui {
+/* BOTONES FLOTANTES (UN SOLO SISTEMA) */
+.ui-btn {
   position: fixed;
-  top: 20px;
-  left: 20px;
-  z-index: 10;
-  display: flex;
-  gap: 15px;
-}
-
-/* botones estilo tu estética */
-button {
+  z-index: 20;
   background: transparent;
   border: 2px solid #ff2d78;
   color: #ff2d78;
@@ -24,66 +16,66 @@ button {
   cursor: pointer;
   border-radius: 20px;
   transition: 0.3s;
+  font-family: Arial Black;
 }
 
-.projects-btn {
-  position: fixed;
-  top: 50px;
-  left: 16px;
-  z-index: 20;
-
-  background: transparent;
-  border: none;
-  color: #ff2d78;
-  font-weight: 700;
-  cursor: pointer;
+.ui-btn:hover {
+  background: #ff2d78;
+  color: white;
 }
 
-.projects-panel {
+/* POSICIÓN BOTONES */
+.about {
+  top: 20px;
+  left: 20px;
+}
+
+.projects {
+  top: 20px;
+  left: 140px;
+}
+
+/* BOXES (ABOUT / PROJECTS) */
+.box {
   position: fixed;
-  inset: 0;
-  background: rgba(255,255,255,0.95);
+  top: 80px;
+  left: 20px;
+
+  width: 240px;
+  background: white;
+
+  border: 2px solid #ff2d78;
+  border-radius: 16px;
+
+  padding: 12px;
   z-index: 30;
-
-  padding: 40px;
-  overflow-y: auto;
 }
 
-.hidden {
-  display: none;
-}
-
-.projects-header {
+.box-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+
   font-family: Arial Black;
   color: #ff2d78;
 }
 
-.grid {
-  margin-top: 40px;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-  gap: 20px;
-}
-
-.card {
-  height: 200px;
-  border: 2px solid #ff2d78;
+.project-list {
+  margin-top: 10px;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
-  padding: 10px;
+  gap: 8px;
 }
 
-.card .img {
-  flex: 1;
-  background: pink;
-  margin-bottom: 10px;
+.project {
+  padding: 6px;
+  border-radius: 10px;
+  border: 1px solid #ff2d78;
+  font-family: Arial;
+  font-size: 12px;
 }
 
-button:hover {
-  background: #ff2d78;
-  color: white;
+/* OCULTO */
+.hidden {
+  display: none;
 }
