@@ -19,9 +19,35 @@
 
 </body>
 
-  <div class="ui">
-  <button onclick="openAbout()">ABOUT</button>
-  <button onclick="openProjects()">PROJECTS</button>
+<button onclick="openProjects()" class="projects-btn">PROJECTS</button>
+
+<div id="projectsPanel" class="projects-panel hidden">
+
+  <div class="projects-header">
+    <h1>PROJECTS</h1>
+    <button onclick="closeProjects()">CLOSE</button>
+  </div>
+
+  <div class="grid">
+
+    <div class="card">
+      <div class="img"></div>
+      <p>Proyecto 01</p>
+    </div>
+
+    <div class="card">
+      <div class="img"></div>
+      <p>Proyecto 02</p>
+    </div>
+
+    <div class="card">
+      <div class="img"></div>
+      <p>Proyecto 03</p>
+    </div>
+
+  </div>
+
+</div>
 </div>
 </html>
 
