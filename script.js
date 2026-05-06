@@ -2,6 +2,8 @@
 // VARIABLES PRINCIPALES
 // ==========================
 
+let fontBold;
+let fontLight;
 // letras individuales (Y A M N A)
 let letters = [];
 
