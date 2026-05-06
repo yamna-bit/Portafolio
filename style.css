@@ -1,3 +1,6 @@
+/* =========================
+   VARIABLES
+========================= */
 :root {
   --pink: #ff2d78;
   --orange: #ff8c00;
@@ -5,20 +8,19 @@
 }
 
 /* =========================
-   BASE
+   BASE GENERAL
 ========================= */
-
 body {
   margin: 0;
   font-family: Arial;
   cursor: none;
-  overflow: hidden;
+  background: white;
+  overflow-x: hidden;
 }
 
 /* =========================
-   CURSOR GLOBAL
+   CURSOR ROSADO
 ========================= */
-
 .cursor {
   position: fixed;
   width: 10px;
@@ -31,19 +33,18 @@ body {
 }
 
 /* =========================
-   BOTONES
+   BOTONES HOME / ABOUT / PROYECTS
 ========================= */
-
 .ui-btn {
   position: fixed;
   z-index: 20;
 
-  background: transparent;
-  border: 2px solid var(--pink);
-  color: var(--pink);
-
   padding: 10px 16px;
   border-radius: 999px;
+
+  border: 2px solid var(--pink);
+  background: transparent;
+  color: var(--pink);
 
   font-family: Arial Black;
   cursor: pointer;
@@ -56,6 +57,7 @@ body {
   color: white;
 }
 
+/* posiciones */
 .about-btn {
   top: 20px;
   left: 20px;
@@ -64,4 +66,88 @@ body {
 .projects-btn {
   top: 20px;
   right: 20px;
+}
+
+/* =========================
+   ABOUT (SIN BLOQUES, MÁS LIMPIO)
+========================= */
+.about {
+  padding: 140px 40px;
+  color: var(--pink);
+}
+
+.about img {
+  width: 180px;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 2px solid var(--pink);
+  display: block;
+  margin-bottom: 20px;
+}
+
+.about h1 {
+  font-size: 48px;
+  margin: 0;
+}
+
+.about p {
+  max-width: 600px;
+  line-height: 1.5;
+}
+
+/* listas tipo “soft UI” */
+.tags {
+  margin-top: 20px;
+}
+
+.tag {
+  display: inline-block;
+  border: 2px solid var(--pink);
+  border-radius: 999px;
+  padding: 6px 10px;
+  margin: 5px;
+  font-size: 12px;
+}
+
+/* =========================
+   PROYECTS GRID (COLLAGE)
+========================= */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+  padding: 120px 40px;
+}
+
+.card {
+  position: relative;
+  display: block;
+  text-decoration: none;
+
+  border-radius: 20px;
+  overflow: hidden;
+
+  border: 2px solid var(--pink);
+
+  transition: 0.3s;
+}
+
+.card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.card span {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+
+  color: white;
+  font-family: Arial Black;
+}
+
+.card:hover {
+  transform: scale(1.03);
 }
