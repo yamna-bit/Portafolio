@@ -1,4 +1,32 @@
 body {
   margin: 0;
   overflow: hidden;
+  font-family: Arial;
+}
+
+/* capa UI encima del canvas */
+.ui {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 10;
+  display: flex;
+  gap: 15px;
+}
+
+/* botones estilo tu estética */
+button {
+  background: transparent;
+  border: 2px solid #ff2d78;
+  color: #ff2d78;
+  padding: 10px 18px;
+  font-size: 14px;
+  cursor: pointer;
+  border-radius: 20px;
+  transition: 0.3s;
+}
+
+button:hover {
+  background: #ff2d78;
+  color: white;
 }
