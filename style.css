@@ -4,14 +4,22 @@
   --yellow: #ffb800;
 }
 
+/* =========================
+   BASE
+========================= */
+
 body {
   margin: 0;
   font-family: Arial;
   cursor: none;
   overflow: hidden;
+  background: white;
 }
 
-/* cursor */
+/* =========================
+   CURSOR PERSONALIZADO
+========================= */
+
 .cursor {
   position: fixed;
   width: 12px;
@@ -20,9 +28,13 @@ body {
   border-radius: 50%;
   pointer-events: none;
   z-index: 9999;
+  transform: translate(-50%, -50%);
 }
 
-/* botones */
+/* =========================
+   BOTONES NAV
+========================= */
+
 button {
   border: 2px solid var(--pink);
   background: transparent;
@@ -30,9 +42,27 @@ button {
   padding: 10px 16px;
   border-radius: 999px;
   font-family: Arial Black;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+/* posiciones */
+.about-btn {
   position: fixed;
+  top: 20px;
+  left: 20px;
   z-index: 10;
 }
 
-.about-btn { top: 20px; left: 20px; }
-.projects-btn { top: 20px; right: 20px; }
+.projects-btn {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 10;
+}
+
+/* hover opcional */
+button:hover {
+  background: var(--pink);
+  color: white;
+}
