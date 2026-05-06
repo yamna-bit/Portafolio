@@ -6,7 +6,7 @@
 
   <title>Projects</title>
 
-  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
@@ -15,32 +15,37 @@
 <div class="cursor" id="cursor"></div>
 
 <!-- NAV -->
-<button class="ui-btn about-btn" onclick="location.href='../about.html'">
+<button class="ui-btn about-btn" onclick="location.href='about.html'">
   ABOUT
 </button>
 
-<button class="ui-btn projects-btn" onclick="location.href='../index.html'">
+<button class="ui-btn projects-btn" onclick="location.href='index.html'">
   HOME
 </button>
 
-<!-- COLLAGE -->
-<div class="grid">
+<!-- HEADER VISUAL -->
+<div class="projects-header">
+  <h1>PROJECTS</h1>
+  <p>exploración · material · código</p>
+</div>
 
-  <a class="card" href="./vellum.html">
-    <div class="card-title">VELLUM</div>
+<!-- COLLAGE VISUAL -->
+<div class="projects-grid">
+
+  <a class="project-card pink" href="projects/vellum.html">
+    <span>VELLUM</span>
   </a>
 
-  <a class="card" href="./andy.html">
-    <div class="card-title">ANDY</div>
+  <a class="project-card orange" href="projects/andy.html">
+    <span>ANDY</span>
   </a>
 
-  <a class="card" href="./abruta.html">
-    <div class="card-title">ABRUTA</div>
+  <a class="project-card yellow" href="projects/abruta.html">
+    <span>ABRUTA</span>
   </a>
 
 </div>
 
-<!-- CURSOR SCRIPT -->
 <script>
 const cursor = document.getElementById("cursor");
 
