@@ -30,3 +30,14 @@ button:hover {
   background: #ff2d78;
   color: white;
 }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  height: 100%;
+}
+
+canvas {
+  display: block;
+}
