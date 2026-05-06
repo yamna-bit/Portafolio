@@ -1,33 +1,41 @@
 // ==========================
-// VARIABLES GLOBALES
+// VARIABLES PRINCIPALES
 // ==========================
 
+// letras individuales (Y A M N A)
 let letters = [];
+
+// posiciones correctas (sombras / guías)
 let slots = [];
+
+// corazones de fondo
 let hearts = [];
+
+// partículas de destello al encajar
 let bursts = [];
 
+// letra que se está arrastrando
 let dragging = null;
-let allLocked = false;
 
-let fontBold;
-let fontLight;
+// estado: todas las letras ya encajadas
+let allLocked = false;
 
 
 // ==========================
 // SETUP
 // ==========================
-
 function setup() {
   createCanvas(windowWidth, windowHeight);
   noCursor();
   textAlign(CENTER, CENTER);
 
+  let word = "YAMNA";
+
+  // tipografías (referencia visual)
   fontBold = 'Arial Black';
   fontLight = 'Arial';
 
-  let word = "YAMNA";
-
+  // colores de cada letra
   let colors = [
     color(255, 140, 0),
     color(255, 80, 120),
@@ -36,34 +44,45 @@ function setup() {
     color(255, 80, 120)
   ];
 
+  // espaciado entre letras
   let gap = 125;
+
+  // centro de la palabra
   let startX = width / 2 - (word.length - 1) * gap / 2;
+
   let y = height / 2 - 40;
 
+  // crear letras y slots
   for (let i = 0; i < word.length; i++) {
 
     let x = startX + i * gap;
 
+    // slots (guías)
     slots.push({
       char: word[i],
       x: x,
       y: y
     });
 
+    // posición inicial aleatoria
     let pos = getRandomPosition();
 
+    // letras
     letters.push({
       char: word[i],
       x: pos.x,
       y: pos.y,
       col: colors[i],
       locked: false,
+
       baseX: x,
       baseY: y,
+
       offset: random(1000)
     });
   }
 
+  // corazones de fondo
   for (let i = 0; i < 40; i++) {
     hearts.push({
       x: random(width),
@@ -78,9 +97,35 @@ function setup() {
 
 
 // ==========================
-// DRAW
+// POSICIÓN ALEATORIA
 // ==========================
+function getRandomPosition() {
+  let x, y, safe = false;
 
+  while (!safe) {
+    x = random(width);
+    y = random(height);
+
+    let d = dist(x, y, width / 2, height / 2);
+
+    if (d > 220) {
+      safe = true;
+
+      for (let l of letters) {
+        if (dist(x, y, l.x, l.y) < 120) {
+          safe = false;
+        }
+      }
+    }
+  }
+
+  return { x, y };
+}
+
+
+// ==========================
+// DRAW LOOP
+// ==========================
 function draw() {
   background(255);
 
@@ -98,7 +143,6 @@ function draw() {
 // ==========================
 // CORAZONES
 // ==========================
-
 function drawHearts() {
   textFont(fontLight);
 
@@ -121,9 +165,8 @@ function drawHearts() {
 
 
 // ==========================
-// SLOTS
+// SLOTS (GUÍAS)
 // ==========================
-
 function drawSlots() {
   if (allLocked) return;
 
@@ -131,6 +174,7 @@ function drawSlots() {
 
   for (let s of slots) {
     fill(0, 15);
+    noStroke();
     textSize(120);
     text(s.char, s.x, s.y);
   }
@@ -140,17 +184,18 @@ function drawSlots() {
 // ==========================
 // LETRAS
 // ==========================
-
 function drawLetters() {
   textFont(fontBold);
 
   for (let l of letters) {
 
+    // drag
     if (dragging === l) {
       l.x = mouseX;
       l.y = mouseY;
     }
 
+    // animación final
     if (allLocked) {
 
       let speed = 0.02 + (l.offset % 0.02);
@@ -179,14 +224,42 @@ function drawLetters() {
 
 
 // ==========================
-// DRAG
+// BURSTS
 // ==========================
+function drawBursts() {
+  textFont(fontLight);
 
+  for (let i = bursts.length - 1; i >= 0; i--) {
+    let b = bursts[i];
+
+    for (let p of b.particles) {
+
+      fill(255, 80, 120, p.alpha);
+      textSize(p.size);
+      text("<3", p.x, p.y);
+
+      p.x += p.vx;
+      p.y += p.vy;
+
+      p.alpha -= 3;
+    }
+
+    if (b.particles[0].alpha <= 0) {
+      bursts.splice(i, 1);
+    }
+  }
+}
+
+
+// ==========================
+// INTERACCIÓN
+// ==========================
 function mousePressed() {
+
   if (allLocked) return;
 
   for (let l of letters) {
-    if (dist(mouseX, mouseY, l.x, l.y) < 60) {
+    if (dist(mouseX, mouseY, l.x, l.y) < 60 && !l.locked) {
       dragging = l;
       break;
     }
@@ -194,45 +267,82 @@ function mousePressed() {
 }
 
 function mouseReleased() {
+
+  if (dragging && !allLocked) {
+
+    for (let s of slots) {
+
+      if (dragging.char === s.char) {
+
+        let d = dist(dragging.x, dragging.y, s.x, s.y);
+
+        if (d < 80) {
+          dragging.x = s.x;
+          dragging.y = s.y;
+          dragging.locked = true;
+
+          createBurst(s.x, s.y);
+        }
+      }
+    }
+  }
+
   dragging = null;
 }
 
 
 // ==========================
-// INFO
+// BURST CREATION
 // ==========================
+function createBurst(x, y) {
+  let particles = [];
 
+  for (let i = 0; i < 12; i++) {
+    particles.push({
+      x: x,
+      y: y,
+      vx: random(-2.5, 2.5),
+      vy: random(-2.5, 2.5),
+      alpha: 255,
+      size: random(10, 18)
+    });
+  }
+
+  bursts.push({ particles });
+}
+
+
+// ==========================
+// CHECK FINAL
+// ==========================
+function checkAllLocked() {
+  allLocked = letters.every(l => l.locked);
+}
+
+
+// ==========================
+// INFO TEXTO
+// ==========================
 function drawInfo() {
-  fill(255, 140, 0);
+
+  textFont(fontLight);
+
+  fill(255, 180, 0);
   textSize(26);
   text("C A R R I Ó N", width / 2, height / 2 + 50);
+
+  fill(255, 140, 0);
+  textSize(13);
+  text("Portafolio", width / 2, height / 2 + 80);
+  text("2026", width / 2, height / 2 + 100);
 }
 
 
 // ==========================
 // CURSOR
 // ==========================
-
 function drawCursor() {
-  let c = document.getElementById("cursor");
-  if (!c) return;
-
-  c.style.left = mouseX + "px";
-  c.style.top = mouseY + "px";
-}
-
-
-// ==========================
-// UTIL
-// ==========================
-
-function getRandomPosition() {
-  return {
-    x: random(width),
-    y: random(height)
-  };
-}
-
-function checkAllLocked() {
-  allLocked = letters.every(l => l.locked);
+  noStroke();
+  fill(255, 80, 120);
+  ellipse(mouseX, mouseY, 10, 10);
 }
