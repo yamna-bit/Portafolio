@@ -11,22 +11,35 @@
 
 <div class="cursor" id="cursor"></div>
 
-<!-- navegación -->
 <button onclick="location.href='index.html'">HOME</button>
-
-<!-- ✔ CORRECTO -->
 <button onclick="location.href='proyects.html'">PROYECTS</button>
 
-<!-- contenido -->
 <div class="about">
 
   <img src="imagen/yo.jpg" alt="yo">
 
-  <h1>Holi<3</h1>
+  <div class="text">
+    <h1>Holi<3</h1>
 
-  <p>Diseño industrial + programación creativa</p>
+    <p>
+      Soy estudiante de diseño industrial explorando interacción entre código, material y sistemas visuales.
+    </p>
+
+    <p>
+      Programación creativa · UX/UI · Materialidad · Prototipado
+    </p>
+  </div>
 
 </div>
+
+<script>
+const cursor = document.getElementById("cursor");
+
+document.addEventListener("mousemove", (e) => {
+  cursor.style.left = e.clientX + "px";
+  cursor.style.top = e.clientY + "px";
+});
+</script>
 
 </body>
 </html>
