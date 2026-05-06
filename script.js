@@ -1,18 +1,13 @@
-// ===== TRANSICIÓN ENTRE PÁGINAS =====
-const links = document.querySelectorAll("a");
-const transition = document.querySelector(".transition");
+// animación simple al hacer scroll
+window.addEventListener("scroll", () => {
+  const sections = document.querySelectorAll("section");
 
-links.forEach(link => {
-  link.addEventListener("click", function(e){
+  sections.forEach(sec => {
+    const top = sec.getBoundingClientRect().top;
 
-    const url = this.href;
-
-    e.preventDefault();
-
-    transition.classList.add("active");
-
-    setTimeout(()=>{
-      window.location = url;
-    }, 500);
+    if (top < window.innerHeight - 100) {
+      sec.style.opacity = "1";
+      sec.style.transform = "translateY(0)";
+    }
   });
 });
