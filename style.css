@@ -63,7 +63,7 @@ body {
   left: 20px;
 }
 
-.projects-btn {
+.proyects-btn {
   top: 20px;
   right: 20px;
 }
@@ -103,27 +103,27 @@ body {
    PROJECTS HEADER
 ========================= */
 
-.projects-header {
+.proyects-header {
   padding: 140px 40px 20px 40px;
 }
 
-.projects-header h1 {
+.proyects-header h1 {
   font-size: 64px;
   margin: 0;
   font-family: Arial Black;
   color: var(--pink);
 }
 
-.projects-header p {
+.proyects-header p {
   color: var(--orange);
   margin-top: 10px;
 }
 
 /* =========================
-   PROJECTS COLLAGE REAL
+   PROYECTS COLLAGE REAL
 ========================= */
 
-.projects-grid {
+.proyects-grid {
   width: 100%;
   min-height: 100vh;
 
@@ -136,7 +136,7 @@ body {
   box-sizing: border-box;
 }
 
-.project-card {
+.proyect-card {
   height: 200px;
 
   border-radius: 20px;
@@ -152,7 +152,7 @@ body {
   transition: 0.3s;
 }
 
-.project-card span {
+.proyect-card span {
   font-size: 18px;
 }
 
@@ -176,7 +176,7 @@ body {
 }
 
 /* hover */
-.project-card:hover {
+.proyect-card:hover {
   transform: scale(1.03);
   filter: saturate(1.2);
 }
