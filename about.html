@@ -1,44 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About</title>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="cursor" id="cursor"></div>
+
+<button class="ui-btn about-btn" onclick="location.href='index.html'">HOME</button>
+<button class="ui-btn projects-btn" onclick="location.href='projects.html'">PROJECTS</button>
+
 <div class="about-container">
 
   <h1 class="about-title">Holi <3</h1>
 
   <div class="box-art">
-    <p>
-      Soy Yamna Carrión, estudiante de Diseño Industrial.
-      Me interesa la intersección entre lo físico y lo digital.
-      En este último tiempo he estado explorando la programación creativa
-      como extensión del diseño.
-    </p>
+    Soy Yamna Carrión, estudiante de Diseño Industrial.
+    Me interesa la interacción entre lo físico y lo digital.
   </div>
 
   <div class="box-art">
     <h2>Habilidades</h2>
-
     <span class="tag">Observación</span>
     <span class="tag">Prototipado</span>
-    <span class="tag">Pensamiento crítico</span>
     <span class="tag">Materiales</span>
-    <span class="tag">Organización</span>
+    <span class="tag">UX/UI</span>
   </div>
 
   <div class="box-art">
     <h2>Software</h2>
-
     <span class="tag">Rhino</span>
     <span class="tag">AutoCAD</span>
     <span class="tag">Illustrator</span>
     <span class="tag">p5.js</span>
-    <span class="tag">InDesign</span>
   </div>
 
   <div class="box-art">
     <h2>Experiencia</h2>
-
-    <p>
-      ✦ Palacio Pereira – Exposición biomateriales<br>
-      ✦ Primavera Hacker – Proyecto AND-Y<br>
-      ✦ Globaliza – intercambio cultural
-    </p>
+    <p>Palacio Pereira · Primavera Hacker · Globaliza</p>
   </div>
 
 </div>
+
+<script>
+const cursor = document.getElementById("cursor");
+
+document.addEventListener("mousemove", (e) => {
+  cursor.style.left = e.clientX + "px";
+  cursor.style.top = e.clientY + "px";
+});
+</script>
+
+</body>
+</html>
