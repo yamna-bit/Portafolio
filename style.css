@@ -202,3 +202,49 @@ canvas {
 body {
   background: white;
 }
+
+.about-editorial {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 60px;
+
+  padding: 140px 60px;
+
+  color: #ff2d78;
+}
+
+.about-photo {
+  width: 100%;
+  border-radius: 20px;
+  overflow: hidden;
+  border: 2px solid #ff2d78;
+}
+
+.about-photo img {
+  width: 100%;
+  display: block;
+}
+
+.about-text h1 {
+  font-size: 60px;
+  font-family: Arial Black;
+  margin: 0 0 20px 0;
+}
+
+.about-text h2 {
+  font-family: Arial Black;
+  font-size: 18px;
+  margin-top: 30px;
+}
+
+.about-text p {
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+@media (max-width: 900px) {
+  .about-editorial {
+    grid-template-columns: 1fr;
+    padding: 120px 20px;
+  }
+}
