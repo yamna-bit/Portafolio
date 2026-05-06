@@ -2,22 +2,12 @@
 // VARIABLES PRINCIPALES
 // ==========================
 
-// letras individuales (Y A M N A)
 let letters = [];
-
-// posiciones correctas (sombras / guías)
 let slots = [];
-
-// corazones de fondo
 let hearts = [];
-
-// partículas de destello al encajar
 let bursts = [];
 
-// letra que se está arrastrando
 let dragging = null;
-
-// estado: todas las letras ya encajadas
 let allLocked = false;
 
 
@@ -31,11 +21,9 @@ function setup() {
 
   let word = "YAMNA";
 
-  // tipografías (referencia visual)
   fontBold = 'Arial Black';
   fontLight = 'Arial';
 
-  // colores de cada letra
   let colors = [
     color(255, 140, 0),
     color(255, 80, 120),
@@ -44,45 +32,34 @@ function setup() {
     color(255, 80, 120)
   ];
 
-  // espaciado entre letras
   let gap = 125;
-
-  // centro de la palabra
   let startX = width / 2 - (word.length - 1) * gap / 2;
-
   let y = height / 2 - 40;
 
-  // crear letras y slots
   for (let i = 0; i < word.length; i++) {
 
     let x = startX + i * gap;
 
-    // slots (guías)
     slots.push({
       char: word[i],
       x: x,
       y: y
     });
 
-    // posición inicial aleatoria
     let pos = getRandomPosition();
 
-    // letras
     letters.push({
       char: word[i],
       x: pos.x,
       y: pos.y,
       col: colors[i],
       locked: false,
-
       baseX: x,
       baseY: y,
-
       offset: random(1000)
     });
   }
 
-  // corazones de fondo
   for (let i = 0; i < 40; i++) {
     hearts.push({
       x: random(width),
@@ -124,7 +101,7 @@ function getRandomPosition() {
 
 
 // ==========================
-// DRAW LOOP
+// DRAW
 // ==========================
 function draw() {
   background(255);
@@ -165,7 +142,7 @@ function drawHearts() {
 
 
 // ==========================
-// SLOTS (GUÍAS)
+// SLOTS
 // ==========================
 function drawSlots() {
   if (allLocked) return;
@@ -189,13 +166,11 @@ function drawLetters() {
 
   for (let l of letters) {
 
-    // drag
     if (dragging === l) {
       l.x = mouseX;
       l.y = mouseY;
     }
 
-    // animación final
     if (allLocked) {
 
       let speed = 0.02 + (l.offset % 0.02);
@@ -292,7 +267,7 @@ function mouseReleased() {
 
 
 // ==========================
-// BURST CREATION
+// BURST
 // ==========================
 function createBurst(x, y) {
   let particles = [];
@@ -313,7 +288,7 @@ function createBurst(x, y) {
 
 
 // ==========================
-// CHECK FINAL
+// CHECK
 // ==========================
 function checkAllLocked() {
   allLocked = letters.every(l => l.locked);
@@ -321,7 +296,7 @@ function checkAllLocked() {
 
 
 // ==========================
-// INFO TEXTO
+// INFO
 // ==========================
 function drawInfo() {
 
@@ -347,19 +322,23 @@ function drawCursor() {
   ellipse(mouseX, mouseY, 10, 10);
 }
 
+
+// ==========================
+// UI: ABOUT + PROJECTS
+// ==========================
+
 function openAbout() {
-  alert("ABOUT: aquí puedes poner tu bio o abrir una sección");
+  document.getElementById("aboutBox").classList.remove("hidden");
+}
+
+function closeAbout() {
+  document.getElementById("aboutBox").classList.add("hidden");
 }
 
 function openProjects() {
-  alert("PROJECTS: aquí van tus trabajos");
-}
-
-function openProjects() {
-  document.getElementById("projectsPanel").classList.remove("hidden");
+  document.getElementById("projectsBox").classList.remove("hidden");
 }
 
 function closeProjects() {
-  document.getElementById("projectsPanel").classList.add("hidden");
+  document.getElementById("projectsBox").classList.add("hidden");
 }
-
