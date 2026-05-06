@@ -346,3 +346,11 @@ function drawCursor() {
   fill(255, 80, 120);
   ellipse(mouseX, mouseY, 10, 10);
 }
+
+function openAbout() {
+  alert("ABOUT: aquí puedes poner tu bio o abrir una sección");
+}
+
+function openProjects() {
+  alert("PROJECTS: aquí van tus trabajos");
+}
