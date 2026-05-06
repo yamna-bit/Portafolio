@@ -22,9 +22,13 @@ let allLocked = false;
 
 // SETUP (se ejecuta una vez)
 function setup() {
-  createCanvas(windowWidth, windowHeight); // canvas full pantalla
+  createCanvas(windowWidth, windowHeight);
+  pixelDensity(1); // canvas full pantalla
   noCursor(); // ocultamos cursor original
   textAlign(CENTER, CENTER); // texto centrado
+  function windowResized() {
+  resizeCanvas(windowWidth, windowHeight);
+}
 
   let word = "YAMNA";
 
