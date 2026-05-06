@@ -1,65 +1,9 @@
 body {
   margin: 0;
   overflow: hidden;
-  font-family: 'Poppins', sans-serif;
+  background: white;
 }
 
-/* canvas */
 canvas {
   display: block;
-}
-
-/* UI simple arriba izquierda */
-.ui {
-  position: fixed;
-  top: 16px;
-  left: 16px;
-  z-index: 10;
-
-  display: flex;
-  gap: 14px;
-  align-items: center;
-}
-
-/* título */
-.title {
-  font-weight: 800;
-  color: #ff2d78;
-  letter-spacing: 2px;
-  font-size: 14px;
-}
-
-/* botones */
-button {
-  background: transparent;
-  border: none;
-  color: #ff2d78;
-  font-weight: 700;
-  font-size: 13px;
-  cursor: pointer;
-}
-
-/* hover */
-button:hover {
-  color: #ff6fa3;
-}
-
-/* MOBILE FIX (CLAVE) */
-@media (max-width: 768px) {
-
-  .ui {
-    top: 10px;
-    left: 10px;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 6px;
-  }
-
-  .title {
-    font-size: 12px;
-  }
-
-  button {
-    font-size: 12px;
-  }
 }
