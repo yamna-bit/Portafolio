@@ -1,11 +1,14 @@
 :root {
   --pink: #ff2d78;
+  --orange: #ff8c00;
+  --yellow: #ffb800;
 }
 
 body {
   margin: 0;
   font-family: Arial;
   cursor: none;
+  overflow: hidden;
 }
 
 /* cursor */
@@ -16,6 +19,7 @@ body {
   background: var(--pink);
   border-radius: 50%;
   pointer-events: none;
+  z-index: 9999;
 }
 
 /* botones */
@@ -25,18 +29,10 @@ button {
   color: var(--pink);
   padding: 10px 16px;
   border-radius: 999px;
+  font-family: Arial Black;
+  position: fixed;
+  z-index: 10;
 }
 
-/* PROYECTS */
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 20px;
-  padding: 40px;
-}
-
-/* ABOUT */
-.about img {
-  width: 200px;
-  border-radius: 20px;
-}
+.about-btn { top: 20px; left: 20px; }
+.projects-btn { top: 20px; right: 20px; }
