@@ -7,7 +7,6 @@ links.forEach(link => {
 
     const url = this.href;
 
-    // evita cambio inmediato
     e.preventDefault();
 
     transition.classList.add("active");
