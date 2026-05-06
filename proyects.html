@@ -2,7 +2,8 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>PROYECTS</title>
+  <title>Proyects</title>
+
   <link rel="stylesheet" href="style.css">
 </head>
 
@@ -10,15 +11,26 @@
 
 <div class="cursor" id="cursor"></div>
 
-<button onclick="location.href='about.html'">ABOUT</button>
-<button onclick="location.href='index.html'">HOME</button>
-
-<h1>PROYECTS</h1>
+<button class="ui-btn about-btn" onclick="location.href='about.html'">ABOUT</button>
+<button class="ui-btn projects-btn" onclick="location.href='index.html'">HOME</button>
 
 <div class="grid">
-  <a href="proyectos/vellum.html">VELLUM</a>
-  <a href="proyectos/andy.html">ANDY</a>
-  <a href="proyectos/abruta.html">ABRUTA</a>
+
+  <a class="card" href="proyectos/vellum.html">
+    <img src="proyectos/vellum.jpg">
+    <span>VELLUM</span>
+  </a>
+
+  <a class="card" href="proyectos/andy.html">
+    <img src="proyectos/andy.jpg">
+    <span>ANDY</span>
+  </a>
+
+  <a class="card" href="proyectos/abruta.html">
+    <img src="proyectos/abruta.jpg">
+    <span>ABRUTA</span>
+  </a>
+
 </div>
 
 </body>
