@@ -1,21 +1,30 @@
 // ==========================
-// VARIABLES
+// VARIABLES GLOBALES
 // ==========================
 
 let letters = [];
 let slots = [];
 let hearts = [];
+let bursts = [];
 
 let dragging = null;
 let allLocked = false;
 
+let fontBold;
+let fontLight;
+
+
 // ==========================
 // SETUP
 // ==========================
+
 function setup() {
   createCanvas(windowWidth, windowHeight);
   noCursor();
   textAlign(CENTER, CENTER);
+
+  fontBold = 'Arial Black';
+  fontLight = 'Arial';
 
   let word = "YAMNA";
 
@@ -67,25 +76,34 @@ function setup() {
   }
 }
 
+
 // ==========================
 // DRAW
 // ==========================
+
 function draw() {
   background(255);
 
   drawHearts();
   drawSlots();
   drawLetters();
+  drawBursts();
   drawInfo();
   drawCursor();
+
+  checkAllLocked();
 }
+
 
 // ==========================
 // CORAZONES
 // ==========================
+
 function drawHearts() {
+  textFont(fontLight);
 
   for (let h of hearts) {
+
     h.y -= h.speed;
     h.x += sin(frameCount * 0.01 + h.y) * h.drift;
 
@@ -101,11 +119,15 @@ function drawHearts() {
   }
 }
 
+
 // ==========================
 // SLOTS
 // ==========================
+
 function drawSlots() {
   if (allLocked) return;
+
+  textFont(fontBold);
 
   for (let s of slots) {
     fill(0, 15);
@@ -114,10 +136,13 @@ function drawSlots() {
   }
 }
 
+
 // ==========================
 // LETRAS
 // ==========================
+
 function drawLetters() {
+  textFont(fontBold);
 
   for (let l of letters) {
 
@@ -127,22 +152,36 @@ function drawLetters() {
     }
 
     if (allLocked) {
-      let targetX = l.baseX + sin(frameCount * 0.02 + l.offset) * 40;
-      let targetY = l.baseY + cos(frameCount * 0.02 + l.offset) * 40;
 
-      l.x = lerp(l.x, targetX, 0.08);
-      l.y = lerp(l.y, targetY, 0.08);
+      let speed = 0.02 + (l.offset % 0.02);
+
+      let nX = noise(frameCount * speed, l.offset);
+      let nY = noise(frameCount * speed + 500, l.offset);
+
+      let chaos = 100;
+
+      let waveX = sin(frameCount * 0.03 + l.offset) * 30;
+      let waveY = cos(frameCount * 0.025 + l.offset) * 30;
+
+      let targetX = l.baseX + map(nX, 0, 1, -chaos, chaos) + waveX;
+      let targetY = l.baseY + map(nY, 0, 1, -chaos, chaos) + waveY;
+
+      l.x = lerp(l.x, targetX, 0.09);
+      l.y = lerp(l.y, targetY, 0.09);
     }
 
     fill(l.col);
+    noStroke();
     textSize(120);
     text(l.char, l.x, l.y);
   }
 }
 
+
 // ==========================
 // DRAG
 // ==========================
+
 function mousePressed() {
   if (allLocked) return;
 
@@ -158,34 +197,42 @@ function mouseReleased() {
   dragging = null;
 }
 
+
 // ==========================
 // INFO
 // ==========================
+
 function drawInfo() {
   fill(255, 140, 0);
   textSize(26);
-  text("CARRIÓN", width/2, height/2 + 60);
-
-  fill(255, 80, 120);
-  textSize(14);
-  text("PORTAFOLIO 2026", width/2, height/2 + 90);
+  text("C A R R I Ó N", width / 2, height / 2 + 50);
 }
+
 
 // ==========================
 // CURSOR
 // ==========================
+
 function drawCursor() {
-  fill(255, 45, 120);
-  noStroke();
-  ellipse(mouseX, mouseY, 10, 10);
+  let c = document.getElementById("cursor");
+  if (!c) return;
+
+  c.style.left = mouseX + "px";
+  c.style.top = mouseY + "px";
 }
+
 
 // ==========================
 // UTIL
 // ==========================
+
 function getRandomPosition() {
   return {
     x: random(width),
     y: random(height)
   };
+}
+
+function checkAllLocked() {
+  allLocked = letters.every(l => l.locked);
 }
