@@ -3,27 +3,46 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Yamna Carrión</title>
+
+  <title>Yamna</title>
 
   <link rel="stylesheet" href="style.css">
 
-  <!-- p5.js -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
 </head>
 
 <body>
 
-  <!-- UI -->
-  <button class="ui-btn about-btn" onclick="goTo('about.html')">
-    ABOUT
-  </button>
+<div class="cursor" id="cursor"></div>
 
-  <button class="ui-btn projects-btn" onclick="goTo('projects.html')">
-    PROJECTS
-  </button>
+<!-- NAV -->
+<button class="ui-btn about-btn" onclick="location.href='about.html'">ABOUT</button>
+<button class="ui-btn projects-btn" onclick="location.href='projects.html'">PROJECTS</button>
 
-  <!-- p5 -->
-  <script src="script.js"></script>
+<!-- P5 CANVAS -->
+<script src="script.js"></script>
+
+<!-- HERO -->
+<section class="hero">
+
+  <div class="hero-img">
+    <img src="tu-foto.jpg" alt="Yamna">
+  </div>
+
+  <h1>Holi <3</h1>
+
+  <p>Diseño Industrial · Interacción · Programación creativa</p>
+
+</section>
+
+<script>
+const cursor = document.getElementById("cursor");
+
+document.addEventListener("mousemove", (e) => {
+  cursor.style.left = e.clientX + "px";
+  cursor.style.top = e.clientY + "px";
+});
+</script>
 
 </body>
 </html>
