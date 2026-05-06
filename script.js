@@ -55,7 +55,7 @@ function setup() {
   for (let i = 0; i < word.length; i++) {
 
     let x = startX + i * gap;
-    let y = height/2 - 40;
+    let y = height * 0.55;
 
     // guardamos posición correcta (slot)
     slots.push({
