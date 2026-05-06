@@ -3,26 +3,44 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>Projects</title>
 
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="../style.css">
 </head>
 
 <body>
 
+<!-- CURSOR -->
 <div class="cursor" id="cursor"></div>
 
-<button class="ui-btn about-btn" onclick="location.href='about.html'">ABOUT</button>
-<button class="ui-btn projects-btn" onclick="location.href='index.html'">HOME</button>
+<!-- NAV -->
+<button class="ui-btn about-btn" onclick="location.href='../about.html'">
+  ABOUT
+</button>
 
+<button class="ui-btn projects-btn" onclick="location.href='../index.html'">
+  HOME
+</button>
+
+<!-- COLLAGE -->
 <div class="grid">
 
-  <a href="projects/vellum.html" class="card">VELLUM</a>
-  <a href="projects/andy.html" class="card">ANDY</a>
-  <a href="projects/abruta.html" class="card">ABRUTA</a>
+  <a class="card" href="./vellum.html">
+    <div class="card-title">VELLUM</div>
+  </a>
+
+  <a class="card" href="./andy.html">
+    <div class="card-title">ANDY</div>
+  </a>
+
+  <a class="card" href="./abruta.html">
+    <div class="card-title">ABRUTA</div>
+  </a>
 
 </div>
 
+<!-- CURSOR SCRIPT -->
 <script>
 const cursor = document.getElementById("cursor");
 
