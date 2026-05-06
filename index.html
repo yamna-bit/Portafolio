@@ -3,50 +3,28 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <!-- Título de la página -->
   <title>Home</title>
-
-  <!-- Conexión al CSS global -->
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<!-- =========================
- CURSOR PERSONALIZADO
- (se mueve con JavaScript)
-========================= -->
+<!-- cursor -->
 <div class="cursor" id="cursor"></div>
 
-<!-- =========================
- BOTONES DE NAVEGACIÓN
-========================= -->
+<!-- navegación -->
+<button onclick="location.href='about.html'">ABOUT</button>
 
-<!-- lleva a ABOUT -->
-<button class="ui-btn about-btn" onclick="location.href='about.html'">
-  ABOUT
-</button>
+<!-- ✔ CORRECTO -->
+<button onclick="location.href='proyects.html'">PROYECTS</button>
 
-<!-- lleva a PROYECTS -->
-<button class="ui-btn projects-btn" onclick="location.href='proyects.html'">
-  PROYECTS
-</button>
-
-<!-- =========================
- CURSOR MOVIMIENTO
-========================= -->
 <script>
-
-// selecciona el cursor del DOM
 const cursor = document.getElementById("cursor");
 
-// mueve el cursor con el mouse
 document.addEventListener("mousemove", (e) => {
   cursor.style.left = e.clientX + "px";
   cursor.style.top = e.clientY + "px";
 });
-
 </script>
 
 </body>
