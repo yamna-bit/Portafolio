@@ -2,8 +2,8 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>About</title>
+
   <link rel="stylesheet" href="style.css">
 </head>
 
@@ -11,35 +11,30 @@
 
 <div class="cursor" id="cursor"></div>
 
-<button onclick="location.href='index.html'">HOME</button>
-<button onclick="location.href='proyects.html'">PROYECTS</button>
+<button class="ui-btn about-btn" onclick="location.href='index.html'">HOME</button>
+<button class="ui-btn projects-btn" onclick="location.href='proyects.html'">PROYECTS</button>
 
 <div class="about">
 
   <img src="imagen/yo.jpg" alt="yo">
 
-  <div class="text">
+  <div>
     <h1>Holi<3</h1>
 
     <p>
-      Soy estudiante de diseño industrial explorando interacción entre código, material y sistemas visuales.
+      Soy Yamna Carrión, estudiante de diseño industrial con interés en programación creativa, interacción digital y materialidad.
     </p>
 
     <p>
-      Programación creativa · UX/UI · Materialidad · Prototipado
+      UX/UI · Prototipado · Diseño industrial · Materiales · Código creativo
+    </p>
+
+    <p>
+      Habilidades: observación, pensamiento crítico, experimentación, organización.
     </p>
   </div>
 
 </div>
-
-<script>
-const cursor = document.getElementById("cursor");
-
-document.addEventListener("mousemove", (e) => {
-  cursor.style.left = e.clientX + "px";
-  cursor.style.top = e.clientY + "px";
-});
-</script>
 
 </body>
 </html>
