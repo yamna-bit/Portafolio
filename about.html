@@ -3,42 +3,68 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Título de la página -->
   <title>About</title>
+
+  <!-- CSS global -->
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
+<!-- =========================
+ CURSOR PERSONALIZADO
+========================= -->
 <div class="cursor" id="cursor"></div>
 
+<!-- =========================
+ NAVEGACIÓN
+========================= -->
+
+<!-- vuelve al inicio -->
 <button class="ui-btn about-btn" onclick="location.href='index.html'">
   HOME
 </button>
 
-<button class="ui-btn projects-btn" onclick="location.href='projects.html'">
-  PROJECTS
+<!-- va a proyectos -->
+<button class="ui-btn projects-btn" onclick="location.href='proyects.html'">
+  PROYECTS
 </button>
 
+<!-- =========================
+ CONTENIDO ABOUT
+========================= -->
 <div class="about-editorial">
 
+  <!-- FOTO PERSONAL -->
   <div class="about-photo">
+
+    <!-- imagen desde carpeta imagen -->
     <img src="imagen/yo.jpg" alt="Yamna">
+
   </div>
 
+  <!-- TEXTO PRINCIPAL -->
   <div class="about-text">
 
+    <!-- nombre / título -->
     <h1>Holi<3</h1>
 
-    <p>Soy Yamna Carrión, estudiante de diseño industrial con interés en diseño de interacción digital y programación creativa.</p>
+    <!-- descripción personal -->
+    <p>
+      Soy Yamna Carrión, estudiante de diseño industrial con interés en diseño interactivo y programación creativa.
+    </p>
 
-    <p>Exploro materiales físicos y código como dos lenguajes paralelos.</p>
-
+    <!-- sección intereses -->
     <h2>Intereses</h2>
     <p>Programación · UX/UI · Prototipado · Diseño industrial · Materialidades</p>
 
+    <!-- sección habilidades -->
     <h2>Habilidades</h2>
     <p>Observación · Prototipado · Pensamiento crítico · Experimentación · Organización</p>
 
+    <!-- software -->
     <h2>Software</h2>
     <p>Rhino · AutoCAD · Illustrator · Inventor · p5.js · InDesign</p>
 
@@ -46,13 +72,20 @@
 
 </div>
 
+<!-- =========================
+ CURSOR MOVIMIENTO
+========================= -->
 <script>
+
+// selecciona cursor
 const cursor = document.getElementById("cursor");
 
+// seguimiento del mouse
 document.addEventListener("mousemove", (e) => {
   cursor.style.left = e.clientX + "px";
   cursor.style.top = e.clientY + "px";
 });
+
 </script>
 
 </body>
