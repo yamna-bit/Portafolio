@@ -8,26 +8,28 @@
 
 <body>
 
-<div class="nav">
-  <a href="index.html">HOME</a>
-  <a href="about.html">ABOUT</a>
-</div>
+<button class="ui-btn about-btn" onclick="goTo('about.html')">
+  ABOUT
+</button>
+
+<button class="ui-btn projects-btn" onclick="goTo('index.html')">
+  HOME
+</button>
 
 <div class="gallery">
 
-  <div class="project">
-    <a href="projects/abruta.html">ABRUTA</a>
-  </div>
-
-  <div class="project">
-    <a href="projects/vellum.html">VELLUM</a>
-  </div>
-
-  <div class="project">
-    <a href="projects/andy.html">ANDY</a>
-  </div>
+  <a href="projects/abruta.html">ABRUTA</a>
+  <a href="projects/vellum.html">VELLUM</a>
+  <a href="projects/andy.html">ANDY</a>
 
 </div>
+
+<script>
+function goTo(url){
+  document.body.classList.add("fade-out");
+  setTimeout(()=> window.location.href=url, 400);
+}
+</script>
 
 </body>
 </html>
