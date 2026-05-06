@@ -1,25 +1,14 @@
 :root {
   --pink: #ff2d78;
-  --orange: #ff8c00;
-  --yellow: #ffb800;
 }
-
-/* =========================
-   BASE
-========================= */
 
 body {
   margin: 0;
   font-family: Arial;
   cursor: none;
-  background: white;
-  overflow-x: hidden;
 }
 
-/* =========================
-   CURSOR
-========================= */
-
+/* cursor */
 .cursor {
   position: fixed;
   width: 12px;
@@ -27,158 +16,27 @@ body {
   background: var(--pink);
   border-radius: 50%;
   pointer-events: none;
-  z-index: 9999;
-  transform: translate(-50%, -50%);
 }
 
-/* =========================
-   BOTONES UI
-========================= */
-
-.ui-btn {
-  position: fixed;
-  z-index: 20;
-
-  background: rgba(255, 45, 120, 0.08);
+/* botones */
+button {
   border: 2px solid var(--pink);
+  background: transparent;
   color: var(--pink);
-
-  padding: 10px 18px;
+  padding: 10px 16px;
   border-radius: 999px;
-
-  font-family: Arial Black;
-  cursor: pointer;
-  transition: 0.3s;
 }
 
-.ui-btn:hover {
-  background: var(--pink);
-  color: white;
-}
-
-.about-btn {
-  top: 20px;
-  left: 20px;
-}
-
-.projects-btn {
-  top: 20px;
-  right: 20px;
-}
-
-/* =========================
-   ABOUT
-========================= */
-
-.about-editorial {
+/* PROYECTS */
+.grid {
   display: grid;
-  grid-template-columns: 320px 1fr;
-  gap: 60px;
-  padding: 140px 60px;
-  color: var(--pink);
-}
-
-.about-photo {
-  border-radius: 20px;
-  overflow: hidden;
-  border: 2px solid var(--pink);
-}
-
-.about-photo img {
-  width: 100%;
-  display: block;
-}
-
-.about-text h1 {
-  font-size: 60px;
-  font-family: Arial Black;
-  margin: 0 0 20px 0;
-}
-
-.about-text h2 {
-  font-family: Arial Black;
-  font-size: 18px;
-  margin-top: 30px;
-}
-
-.about-text p {
-  font-size: 15px;
-  line-height: 1.6;
-}
-
-/* =========================
-   PROJECTS
-========================= */
-
-.projects-header {
-  padding: 140px 40px 20px 40px;
-}
-
-.projects-header h1 {
-  font-size: 64px;
-  margin: 0;
-  font-family: Arial Black;
-  color: var(--pink);
-}
-
-.projects-header p {
-  color: var(--orange);
-}
-
-.projects-grid {
-  width: 100%;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 20px;
   padding: 40px;
-  box-sizing: border-box;
 }
 
-.project-card {
-  height: 200px;
+/* ABOUT */
+.about img {
+  width: 200px;
   border-radius: 20px;
-  display: flex;
-  align-items: flex-end;
-  padding: 15px;
-  font-family: Arial Black;
-  text-decoration: none;
-  transition: 0.3s;
-}
-
-.project-card span {
-  font-size: 18px;
-}
-
-.pink {
-  border: 2px solid var(--pink);
-  color: var(--pink);
-  background: rgba(255, 45, 120, 0.12);
-}
-
-.orange {
-  border: 2px solid var(--orange);
-  color: var(--orange);
-  background: rgba(255, 140, 0, 0.12);
-}
-
-.yellow {
-  border: 2px solid var(--yellow);
-  color: var(--yellow);
-  background: rgba(255, 184, 0, 0.12);
-}
-
-.project-card:hover {
-  transform: scale(1.03);
-  filter: saturate(1.2);
-}
-
-/* =========================
-   CANVAS FIX
-========================= */
-
-canvas {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 0;
 }
