@@ -12,40 +12,55 @@
 
 <div class="cursor" id="cursor"></div>
 
-<button class="ui-btn about-btn" onclick="location.href='index.html'">HOME</button>
-<button class="ui-btn projects-btn" onclick="location.href='projects.html'">PROJECTS</button>
+<button class="ui-btn about-btn" onclick="location.href='index.html'">
+  HOME
+</button>
 
-<div class="about-container">
+<button class="ui-btn projects-btn" onclick="location.href='projects.html'">
+  PROJECTS
+</button>
 
-  <h1 class="about-title">Holi <3</h1>
+<div class="about-editorial">
 
-  <div class="box-art">
-    Soy Yamna Carrión, estudiante de Diseño Industrial.
-    Me interesa la interacción entre lo físico y lo digital.
+  <div class="about-photo">
+    <img src="tu-foto.jpg" alt="Yamna">
   </div>
 
-  <div class="box-art">
+  <div class="about-text">
+
+    <h1>Holi<3</h1>
+
+    <p>
+      Soy Yamna Carrión estudiante de diseño industrial con intereses en el diseño de interacción digital.
+      En este último tiempo he ido descubriendo una nueva forma de diseñar mediante la programación creativa.
+    </p>
+
+    <p>
+      Me gusta mucho el trabajo con materiales físicos, pero al mismo tiempo he encontrado en el código
+      una nueva forma de expresión.
+    </p>
+
+    <h2>Intereses</h2>
+    <p>Programación · UX/UI · Prototipado · Diseño industrial · Materialidades</p>
+
     <h2>Habilidades</h2>
-    <span class="tag">Observación</span>
-    <span class="tag">Prototipado</span>
-    <span class="tag">Materiales</span>
-    <span class="tag">UX/UI</span>
-  </div>
+    <p>Observación · Prototipado · Pensamiento crítico · Experimentación · Organización</p>
 
-  <div class="box-art">
     <h2>Software</h2>
-    <span class="tag">Rhino</span>
-    <span class="tag">AutoCAD</span>
-    <span class="tag">Illustrator</span>
-    <span class="tag">p5.js</span>
-  </div>
+    <p>Rhinoceros · AutoCAD · Illustrator · Inventor · p5.js · InDesign</p>
 
-  <div class="box-art">
-    <h2>Experiencia</h2>
-    <p>Palacio Pereira · Primavera Hacker · Globaliza</p>
   </div>
 
 </div>
+
+<script>
+const cursor = document.getElementById("cursor");
+
+document.addEventListener("mousemove", (e) => {
+  cursor.style.left = e.clientX + "px";
+  cursor.style.top = e.clientY + "px";
+});
+</script>
 
 <script>
 const cursor = document.getElementById("cursor");
