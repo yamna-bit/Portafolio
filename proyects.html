@@ -3,85 +3,30 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <!-- título -->
   <title>PROYECTS</title>
-
-  <!-- CSS global -->
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<!-- =========================
- CURSOR PERSONALIZADO
-========================= -->
 <div class="cursor" id="cursor"></div>
 
-<!-- =========================
- NAVEGACIÓN
-========================= -->
+<!-- navegación -->
+<button onclick="location.href='about.html'">ABOUT</button>
 
-<!-- vuelve a ABOUT -->
-<button class="ui-btn about-btn" onclick="location.href='about.html'">
-  ABOUT
-</button>
+<button onclick="location.href='index.html'">HOME</button>
 
-<!-- vuelve al HOME -->
-<button class="ui-btn projects-btn" onclick="location.href='index.html'">
-  HOME
-</button>
+<!-- título -->
+<h1>PROYECTS</h1>
 
-<!-- =========================
- HEADER DE PROYECTS
-========================= -->
-<div class="projects-header">
+<!-- collage -->
+<div class="grid">
 
-  <!-- título principal -->
-  <h1>PROYECTS</h1>
-
-  <!-- subtítulo conceptual -->
-  <p>exploración · material · código</p>
+  <a href="projects/vellum.html">VELLUM</a>
+  <a href="projects/andy.html">ANDY</a>
+  <a href="projects/abruta.html">ABRUTA</a>
 
 </div>
-
-<!-- =========================
- COLLAGE DE PROYECTOS
-========================= -->
-<div class="projects-grid">
-
-  <!-- proyecto 1 -->
-  <a class="project-card pink" href="projects/vellum.html">
-    <span>VELLUM</span>
-  </a>
-
-  <!-- proyecto 2 -->
-  <a class="project-card orange" href="projects/andy.html">
-    <span>ANDY</span>
-  </a>
-
-  <!-- proyecto 3 -->
-  <a class="project-card yellow" href="projects/abruta.html">
-    <span>ABRUTA</span>
-  </a>
-
-</div>
-
-<!-- =========================
- CURSOR MOVIMIENTO
-========================= -->
-<script>
-
-// cursor DOM
-const cursor = document.getElementById("cursor");
-
-// seguimiento mouse
-document.addEventListener("mousemove", (e) => {
-  cursor.style.left = e.clientX + "px";
-  cursor.style.top = e.clientY + "px";
-});
-
-</script>
 
 </body>
 </html>
