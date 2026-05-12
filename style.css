@@ -1,153 +1,82 @@
-/* =========================
-   VARIABLES
-========================= */
-:root {
-  --pink: #ff2d78;
-  --orange: #ff8c00;
-  --yellow: #ffb800;
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
 }
 
-/* =========================
-   BASE GENERAL
-========================= */
-body {
-  margin: 0;
-  font-family: Arial;
-  cursor: none;
-  background: white;
-  overflow-x: hidden;
+body{
+background:white;
+font-family:Arial,sans-serif;
+cursor:none;
+overflow:hidden;
 }
 
-/* =========================
-   CURSOR ROSADO
-========================= */
-.cursor {
-  position: fixed;
-  width: 10px;
-  height: 10px;
-  background: var(--pink);
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 9999;
-  transform: translate(-50%, -50%);
+.page{
+overflow:auto;
+cursor:auto;
 }
 
-/* =========================
-   BOTONES HOME / ABOUT / PROYECTS
-========================= */
-.ui-btn {
-  position: fixed;
-  z-index: 20;
-
-  padding: 10px 16px;
-  border-radius: 999px;
-
-  border: 2px solid var(--pink);
-  background: transparent;
-  color: var(--pink);
-
-  font-family: Arial Black;
-  cursor: pointer;
-
-  transition: 0.3s;
+canvas{
+display:block;
 }
 
-.ui-btn:hover {
-  background: var(--pink);
-  color: white;
+nav{
+position:fixed;
+bottom:35px;
+width:100%;
+display:flex;
+justify-content:center;
+gap:70px;
+z-index:1000;
 }
 
-/* posiciones */
-.about-btn {
-  top: 20px;
-  left: 20px;
+nav a{
+text-decoration:none;
+color:#ff4375;
+font-size:14px;
+letter-spacing:4px;
+transition:.3s;
 }
 
-.projects-btn {
-  top: 20px;
-  right: 20px;
+nav a:hover{
+color:#ff7e01;
 }
 
-/* =========================
-   ABOUT (SIN BLOQUES, MÁS LIMPIO)
-========================= */
-.about {
-  padding: 140px 40px;
-  color: var(--pink);
+.content{
+max-width:1000px;
+margin:auto;
+padding:120px 80px;
 }
 
-.about img {
-  width: 180px;
-  height: 180px;
-  object-fit: cover;
-  border-radius: 50%;
-  border: 2px solid var(--pink);
-  display: block;
-  margin-bottom: 20px;
+h1{
+font-size:5rem;
+color:#ff7e01;
+margin-bottom:40px;
 }
 
-.about h1 {
-  font-size: 48px;
-  margin: 0;
+p{
+font-size:1.1rem;
+line-height:1.8;
+margin-bottom:25px;
+color:#333;
 }
 
-.about p {
-  max-width: 600px;
-  line-height: 1.5;
+.project-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:25px;
 }
 
-/* listas tipo “soft UI” */
-.tags {
-  margin-top: 20px;
+.card{
+border:2px solid #ff4375;
+padding:40px;
+font-size:1.2rem;
+text-align:center;
+transition:.3s;
 }
 
-.tag {
-  display: inline-block;
-  border: 2px solid var(--pink);
-  border-radius: 999px;
-  padding: 6px 10px;
-  margin: 5px;
-  font-size: 12px;
-}
-
-/* =========================
-   PROYECTS GRID (COLLAGE)
-========================= */
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 20px;
-  padding: 120px 40px;
-}
-
-.card {
-  position: relative;
-  display: block;
-  text-decoration: none;
-
-  border-radius: 20px;
-  overflow: hidden;
-
-  border: 2px solid var(--pink);
-
-  transition: 0.3s;
-}
-
-.card img {
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
-}
-
-.card span {
-  position: absolute;
-  bottom: 10px;
-  left: 10px;
-
-  color: white;
-  font-family: Arial Black;
-}
-
-.card:hover {
-  transform: scale(1.03);
+.card:hover{
+background:#ff4375;
+color:white;
+transform:translateY(-8px);
 }
