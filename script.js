@@ -1,25 +1,27 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-  document.body.classList.add("loaded");
+    const links = document.querySelectorAll("a");
 
-  const links = document.querySelectorAll("a");
+    links.forEach(link => {
 
-  links.forEach(link => {
-    link.addEventListener("click", e => {
+        link.addEventListener("click", function(e){
 
-      const href = link.getAttribute("href");
+            const href = this.getAttribute("href");
 
-      if (href && !href.startsWith("#")) {
-        e.preventDefault();
+            if(href && !href.startsWith("#")){
 
-        document.body.classList.add("transition-active");
+                e.preventDefault();
 
-        setTimeout(() => {
-          window.location.href = href;
-        }, 1400);
-      }
+                document.body.classList.add("loading-screen");
+
+                setTimeout(()=>{
+                    window.location.href = href;
+                },3000);
+
+            }
+
+        });
 
     });
-  });
 
 });
