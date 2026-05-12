@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-  document.body.classList.add("fade-in");
+  document.body.classList.add("loaded");
 
   const links = document.querySelectorAll("a");
 
@@ -12,13 +12,13 @@ document.addEventListener("DOMContentLoaded", () => {
       if (href && !href.startsWith("#")) {
         e.preventDefault();
 
-        document.body.classList.remove("fade-in");
-        document.body.classList.add("fade-out");
+        document.body.classList.add("transition-active");
 
         setTimeout(() => {
           window.location.href = href;
-        }, 700);
+        }, 1400);
       }
+
     });
   });
 
