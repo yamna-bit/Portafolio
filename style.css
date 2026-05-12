@@ -165,3 +165,39 @@ box-shadow:
 }
 
 }
+
+.socials{
+margin-top:80px;
+display:flex;
+gap:50px;
+flex-wrap:wrap;
+}
+
+.socials a{
+text-decoration:none;
+color:#ff4375;
+font-size:13px;
+letter-spacing:6px;
+transition:.35s ease;
+position:relative;
+}
+
+.socials a:hover{
+color:#ff7e01;
+transform:translateY(-4px);
+}
+
+.socials a::after{
+content:"<3";
+position:absolute;
+left:50%;
+transform:translateX(-50%);
+bottom:-18px;
+font-size:10px;
+opacity:0;
+transition:.35s;
+}
+
+.socials a:hover::after{
+opacity:1;
+}
